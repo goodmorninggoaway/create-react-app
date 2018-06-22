@@ -155,16 +155,12 @@ module.exports = {
       }),
       new OptimizeCSSAssetsPlugin(),
     ],
-    // Automatically split vendor and commons
-    // https://twitter.com/wSokra/status/969633336732905474
-    // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
-    splitChunks: {
-      chunks: 'all',
-      name: 'vendors',
-    },
-    // Keep the runtime chunk seperated to enable long term caching
-    // https://twitter.com/wSokra/status/969679223278505985
-    runtimeChunk: true,
+  },
+  externals: {
+    //react: 'react',
+    //redux: 'redux',
+    //'react-dom': 'react-dom',
+    highcharts: 'Highcharts', // TODO This is terrible
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -251,6 +247,10 @@ module.exports = {
               limit: 10000,
               name: 'static/media/[name].[hash:8].[ext]',
             },
+          },
+          {
+            test: /\.worker\.js$/,
+            use: { loader: 'worker-loader' },
           },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.

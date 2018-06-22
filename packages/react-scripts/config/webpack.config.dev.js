@@ -24,11 +24,11 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
-const publicPath = '/';
+const publicPath = paths.servedPath;
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
-const publicUrl = '';
+const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
@@ -116,17 +116,11 @@ module.exports = {
     devtoolModuleFilenameTemplate: info =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
-  optimization: {
-    // Automatically split vendor and commons
-    // https://twitter.com/wSokra/status/969633336732905474
-    // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
-    splitChunks: {
-      chunks: 'all',
-      name: 'vendors',
-    },
-    // Keep the runtime chunk seperated to enable long term caching
-    // https://twitter.com/wSokra/status/969679223278505985
-    runtimeChunk: true,
+  externals: {
+    //react: 'react',
+    //redux: 'redux',
+    //'react-dom': 'react-dom',
+    highcharts: 'Highcharts', // TODO This is terrible
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -213,6 +207,10 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          {
+            test: /\.worker\.js$/,
+            use: { loader: 'worker-loader' },
+          },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
           {
@@ -225,7 +223,7 @@ module.exports = {
               {
                 loader: require.resolve('thread-loader'),
                 options: {
-                  poolTimeout: Infinity // keep workers alive for more effective watch mode
+                  poolTimeout: Infinity, // keep workers alive for more effective watch mode
                 },
               },
               {
@@ -266,7 +264,7 @@ module.exports = {
               {
                 loader: require.resolve('thread-loader'),
                 options: {
-                  poolTimeout: Infinity // keep workers alive for more effective watch mode
+                  poolTimeout: Infinity, // keep workers alive for more effective watch mode
                 },
               },
               {
