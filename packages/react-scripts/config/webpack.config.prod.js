@@ -96,8 +96,8 @@ module.exports = {
   // We generate sourcemaps in production. This is slow but gives good results.
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
-  // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  // In production, we only want to load the app code.
+  entry: [paths.appIndexJs],
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -156,10 +156,11 @@ module.exports = {
       new OptimizeCSSAssetsPlugin(),
     ],
   },
+  // All microapps should share the same version of a very limited subset of global dependencies.
+  // Typically, these should be limited to dependencies that cannot be scoped and cannot have multiple coexisting versions.
   externals: {
-    //react: 'react',
-    //redux: 'redux',
-    //'react-dom': 'react-dom',
+    react: 'React',
+    'react-dom': 'ReactDOM',
     highcharts: 'Highcharts', // TODO This is terrible
   },
   resolve: {

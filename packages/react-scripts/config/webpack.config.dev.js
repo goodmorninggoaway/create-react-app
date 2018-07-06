@@ -82,8 +82,6 @@ module.exports = {
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: [
-    // We ship a few polyfills by default:
-    require.resolve('./polyfills'),
     // Include an alternative client for WebpackDevServer. A client's job is to
     // connect to WebpackDevServer by a socket and get notified about changes.
     // When you save a file, the client will either apply hot updates (in case
@@ -116,10 +114,11 @@ module.exports = {
     devtoolModuleFilenameTemplate: info =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
   },
+  // All microapps should share the same version of a very limited subset of global dependencies.
+  // Typically, these should be limited to dependencies that cannot be scoped and cannot have multiple coexisting versions.
   externals: {
-    //react: 'react',
-    //redux: 'redux',
-    //'react-dom': 'react-dom',
+    react: 'React',
+    'react-dom': 'ReactDOM',
     highcharts: 'Highcharts', // TODO This is terrible
   },
   resolve: {
@@ -209,7 +208,7 @@ module.exports = {
           },
           {
             test: /\.worker\.js$/,
-            use: { loader: 'worker-loader' },
+            use: { loader: require.resolve('worker-loader') },
           },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
