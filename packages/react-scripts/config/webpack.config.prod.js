@@ -250,7 +250,7 @@ module.exports = {
           },
           {
             test: /\.worker\.js$/,
-            use: { loader: 'worker-loader' },
+            use: { loader: require.resolve('worker-loader') },
           },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
