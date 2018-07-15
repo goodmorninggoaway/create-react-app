@@ -161,7 +161,6 @@ module.exports = {
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
-    highcharts: 'Highcharts', // TODO This is terrible
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
