@@ -90,6 +90,11 @@ module.exports = function(
   // Copy over some of the devDependencies
   appPackage.dependencies = appPackage.dependencies || {};
 
+  appPackage.dependencies['@infosight/shell-api'] =
+    'git+https://github.hpe.com/infosight/shell-api';
+  appPackage.dependencies['elmer'] =
+    'git+https://github.hpe.com/infosight/elmer';
+
   // Setup the script rules
   appPackage.scripts = {
     start: 'react-scripts start',

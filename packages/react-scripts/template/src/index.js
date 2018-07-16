@@ -1,12 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { register } from '@infosight/shell-api/lib/Bootstrapper';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+register({
+  appId: 'vmware',
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+  /**
+   * Lifecycle function that should load the bare minimum needed to determine whether or not to continue
+   * @return {Promise<boolean>}
+   */
+  async shouldLoad() {
+    return true;
+  },
+
+  /**
+   * Lifecycle function that does whatever setup is needed before loading the extensions
+   * @return {Promise<boolean>}
+   */
+  async beforeLoad() {
+    const module = await import('./bootstrapper/beforeLoad');
+    await module.default();
+  },
+
+  /**
+   * Lazy-load the extensions as a React component
+   * @return {Promise<Promise<React.Component>>}
+   */
+  async load() {
+    const module = await import('./bootstrapper');
+    return module.default;
+  },
+});
