@@ -21,6 +21,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -100,6 +101,8 @@ module.exports = {
     // changing JS code would still trigger a refresh.
   ],
   output: {
+    // The build folder.
+    path: paths.appBuild,
     // Add /* filename */ comments to generated require()s in the output.
     pathinfo: true,
     // This does not produce a real file. It's just the virtual path that is
@@ -390,6 +393,9 @@ module.exports = {
       fileName: 'asset-manifest.json',
       publicPath: publicPath,
     }),
+    // Forces webpack-dev-server program to write bundle files to the file system
+    // This allows the shell to auto-reload
+    new WriteFilePlugin({ useHashIndex: false }),
   ],
 
   // Some libraries import Node modules but don't use them in the browser.

@@ -1,6 +1,6 @@
 {
   "name": "@infosight/microapp-scripts",
-  "version": "1.1.0-9",
+  "version": "1.0.0-beta.14",
   "description": "Configuration and scripts for Create React InfoSight Microapp.",
   "repository": "goodmorninggoaway/create-react-infosight-microapp",
   "license": "MIT",
@@ -72,7 +72,8 @@
     "webpack-dev-server": "3.1.4",
     "webpack-manifest-plugin": "2.0.3",
     "whatwg-fetch": "2.0.4",
-    "worker-loader": "^2.0.0"
+    "worker-loader": "^2.0.0",
+    "write-file-webpack-plugin": "^4.3.2"
   },
   "devDependencies": {
     "react": "^16.4.1",
