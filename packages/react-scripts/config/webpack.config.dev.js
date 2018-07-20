@@ -113,6 +113,8 @@ module.exports = {
     chunkFilename: 'static/js/[name].chunk.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath,
+    // Fix WebWorkers: https://github.com/webpack/webpack/issues/6642
+    globalObject: 'self',
     // Point sourcemap entries to original disk location (format as URL on Windows)
     devtoolModuleFilenameTemplate: info =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
@@ -208,9 +210,31 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          // Process WebWorker JS with Babel.
+          // The preset includes JSX, Flow, and some ESnext features.
           {
-            test: /\.worker\.js$/,
-            use: { loader: require.resolve('worker-loader') },
+            test: /\.worker\.(js|jsx|mjs)$/,
+            include: paths.appSrc,
+            use: [
+              require.resolve('worker-loader'),
+              // This loader parallelizes code compilation, it is optional but
+              // improves compile time on larger projects
+              require.resolve('thread-loader'),
+              {
+                loader: require.resolve('babel-loader'),
+                options: {
+                  // @remove-on-eject-begin
+                  babelrc: false,
+                  presets: [require.resolve('babel-preset-react-app')],
+                  // @remove-on-eject-end
+                  // This is a feature of `babel-loader` for webpack (not Babel itself).
+                  // It enables caching results in ./node_modules/.cache/babel-loader/
+                  // directory for faster rebuilds.
+                  cacheDirectory: true,
+                  highlightCode: true,
+                },
+              },
+            ],
           },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
