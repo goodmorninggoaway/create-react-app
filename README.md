@@ -13,7 +13,7 @@ npm link
 ```
 
 If you have problems, delete [node_modules](packages/react-scripts/node_modules) and run `npx lerna bootstrap` again.
-You shouldn't have to run `npm install` or `yarn`. Basically always use lerna, or expect problems.
+You shouldn't have to run `npm install` or `yarn`. Basically, always use lerna or expect problems.
 
 
 Everything below this point is from create-react-app
