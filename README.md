@@ -1,3 +1,23 @@
+InfoSight Readme
+---
+# Installation
+`npx lerna bootstrap`
+
+# Developing
+Everything you need to edit is probably in [react-scripts](packages/react-scripts). You can test locally
+with `npm link`.
+
+```
+cd packages/react-scripts
+npm link
+```
+
+If you have problems, delete [node_modules](packages/react-scripts/node_modules) and run `npx lerna bootstrap` again.
+You shouldn't have to run `npm install` or `yarn`. Basically always use lerna, or expect problems.
+
+
+Everything below this point is from create-react-app
+---
 # Create React App [![Build Status](https://travis-ci.org/facebook/create-react-app.svg?branch=master)](https://travis-ci.org/facebook/create-react-app)
 
 Create React apps with no build configuration.
