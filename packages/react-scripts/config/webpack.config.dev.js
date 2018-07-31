@@ -22,6 +22,7 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const packageJson = require(paths.appPackageJson);
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -111,6 +112,12 @@ module.exports = {
     filename: 'static/js/bundle.js',
     // There are also additional JS chunk files if you use code splitting.
     chunkFilename: 'static/js/[name].chunk.js',
+    // A JSONP function name used to asynchronously load chunks
+    // We need a unique name so that this does not conflict with other modules
+    jsonpFunction: 'webpackJsonp' + packageJson.name.replace(/[@\-/]/g, ''),
+    // The JSONP function used by webpack for async loading of hot update chunks.
+    // We need a unique name so that this does not conflict with other modules
+    hotUpdateFunction: 'webpackHotUpdate' + packageJson.name.replace(/[@\-/]/g, ''),
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath,
     // Fix WebWorkers: https://github.com/webpack/webpack/issues/6642

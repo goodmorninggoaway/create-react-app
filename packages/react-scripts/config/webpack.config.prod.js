@@ -23,6 +23,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const packageJson = require(paths.appPackageJson);
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -106,6 +107,12 @@ module.exports = {
     // We don't currently advertise code splitting but Webpack supports it.
     filename: 'static/js/[name].[chunkhash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    // A JSONP function name used to asynchronously load chunks
+    // We need a unique name so that this does not conflict with other modules
+    jsonpFunction: 'webpackJsonp' + packageJson.name.replace(/[@\-/]/g, ''),
+    // The JSONP function used by webpack for async loading of hot update chunks.
+    // We need a unique name so that this does not conflict with other modules
+    hotUpdateFunction: 'webpackHotUpdate' + packageJson.name.replace(/[@\-/]/g, ''),
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
     // Fix WebWorkers: https://github.com/webpack/webpack/issues/6642
