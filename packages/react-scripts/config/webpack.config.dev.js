@@ -117,7 +117,8 @@ module.exports = {
     jsonpFunction: 'webpackJsonp' + packageJson.name.replace(/[@\-/]/g, ''),
     // The JSONP function used by webpack for async loading of hot update chunks.
     // We need a unique name so that this does not conflict with other modules
-    hotUpdateFunction: 'webpackHotUpdate' + packageJson.name.replace(/[@\-/]/g, ''),
+    hotUpdateFunction:
+      'webpackHotUpdate' + packageJson.name.replace(/[@\-/]/g, ''),
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath,
     // Fix WebWorkers: https://github.com/webpack/webpack/issues/6642
@@ -131,6 +132,7 @@ module.exports = {
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
+    'styled-components': 'styled',
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
