@@ -21,7 +21,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const WriteFilePlugin = require('write-file-webpack-plugin');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
 const packageJson = require(paths.appPackageJson);
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -426,9 +426,14 @@ module.exports = {
       fileName: 'asset-manifest.json',
       publicPath: publicPath,
     }),
-    // Forces webpack-dev-server program to write bundle files to the file system
-    // This allows the shell to auto-reload
-    new WriteFilePlugin({ useHashIndex: false }),
+    // This allows the shell to auto-reload and find
+    // port: '*' enables the plugin to find an available port for livereload
+    new LiveReloadPlugin({
+      appendScriptTag: true,
+      hostname: 'localhost',
+      protocol: 'http',
+      port: '*',
+    }),
   ],
 
   // Some libraries import Node modules but don't use them in the browser.
