@@ -18,7 +18,13 @@ const findMonorepo = require('react-dev-utils/workspaceUtils').findMonorepo;
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
-const envPublicUrl = process.env.PUBLIC_URL;
+// Force dynamic public path resolution and disallow PUBLIC_URL usage
+const envPublicUrl = '/';
+if (process.env.PUBLIC_URL) {
+  throw new Error(
+    'PUBLIC_URL is no longer supported. The public path should be set dynamically using shell-api.'
+  );
+}
 
 function ensureSlash(inputPath, needsSlash) {
   const hasSlash = inputPath.endsWith('/');
@@ -31,8 +37,7 @@ function ensureSlash(inputPath, needsSlash) {
   }
 }
 
-const getPublicUrl = appPackageJson =>
-  envPublicUrl || require(appPackageJson).homepage;
+const getPublicUrl = () => null;
 
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.
