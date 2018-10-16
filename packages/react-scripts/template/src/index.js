@@ -26,7 +26,7 @@ register({
    * @return {Promise<React.Component>}
    */
   async getExtensionContainer() {
-    const module = await import('./bootstrapper/MicroAppContainer');
+    const module = await import('./bootstrapper/MicroApp');
     return module.default;
   },
 });
