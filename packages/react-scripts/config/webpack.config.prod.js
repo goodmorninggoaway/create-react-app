@@ -265,7 +265,13 @@ module.exports = {
             test: /\.worker\.(js|jsx|mjs)$/,
             include: paths.appSrc,
             use: [
-              require.resolve('worker-loader'),
+              {
+                loader: require.resolve('worker-loader'),
+                options: {
+                  inline: true,
+                  fallback: false,
+                },
+              },
               // This loader parallelizes code compilation, it is optional but
               // improves compile time on larger projects
               require.resolve('thread-loader'),
