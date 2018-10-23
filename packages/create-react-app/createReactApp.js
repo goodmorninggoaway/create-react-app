@@ -191,7 +191,7 @@ function createApp(name, verbose, version, useNpm, template) {
     process.exit(1);
   }
 
-  console.log(`Creating a new React app in ${chalk.green(root)}.`);
+  console.log(`Creating a new Microapp @infosight/${appName} in ${chalk.green(root)}.`);
   console.log();
 
   const packageJson = {
