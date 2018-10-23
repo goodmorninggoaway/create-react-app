@@ -1,11 +1,11 @@
 {
   "name": "@infosight/microapp-scripts",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "description": "Configuration and scripts for Create React InfoSight Microapp.",
   "repository": "goodmorninggoaway/create-react-infosight-microapp",
   "license": "MIT",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "bugs": {
     "url": "https://github.com/goodmorninggoaway/create-react-infosight-microapp/issues"
@@ -47,7 +47,6 @@
     "fs-extra": "5.0.0",
     "graphql": "0.13.2",
     "graphql-tag": "2.9.2",
-    "html-webpack-plugin": "3.2.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "22.4.3",
     "loader-utils": "^1.1.0",
