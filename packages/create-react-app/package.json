@@ -1,17 +1,17 @@
 {
-  "name": "create-react-app",
-  "version": "1.5.1",
+  "name": "@infosight/create-microapp",
+  "version": "1.0.1",
   "keywords": [
     "react"
   ],
-  "description": "Create React apps with no build configuration.",
-  "repository": "facebook/create-react-app",
+  "description": "Create React-based Microapps with no build configuration.",
+  "repository": "goodmorninggoaway/create-react-infosight-microapp",
   "license": "MIT",
   "engines": {
     "node": ">=4"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/goodmorninggoaway/create-react-infosight-microapp/issues"
   },
   "files": [
     "index.js",

@@ -49,7 +49,6 @@ const url = require('url');
 const hyperquest = require('hyperquest');
 const envinfo = require('envinfo');
 const os = require('os');
-const findMonorepo = require('react-dev-utils/workspaceUtils').findMonorepo;
 const packageJson = require('./package.json');
 
 // These files should be allowed to remain on a failed install,
@@ -182,26 +181,30 @@ createApp(
 );
 
 function createApp(name, verbose, version, useNpm, template) {
-  const root = path.resolve(name);
-  const appName = path.basename(root);
+  const appName = `portal-${name}-frontend`;
+  const root = path.resolve(appName);
+  const microappId = path.basename(name);
 
   checkAppName(appName);
-  fs.ensureDirSync(name);
-  if (!isSafeToCreateProjectIn(root, name)) {
+  fs.ensureDirSync(appName);
+  if (!isSafeToCreateProjectIn(root, appName)) {
     process.exit(1);
   }
 
-  console.log(`Creating a new React app in ${chalk.green(root)}.`);
+  console.log(`Creating a new Microapp @infosight/${appName} in ${chalk.green(root)}.`);
   console.log();
 
   const packageJson = {
-    name: appName,
-    version: '0.1.0',
-    private: true,
+    name: `@infosight/${appName}`,
+    version: '1.0.0',
   };
   fs.writeFileSync(
     path.join(root, 'package.json'),
     JSON.stringify(packageJson, null, 2) + os.EOL
+  );
+  fs.writeFileSync(
+    path.join(root, '.env'),
+    `REACT_APP_MICROAPP_ID=${microappId}` + os.EOL
   );
 
   const useYarn = useNpm ? false : shouldUseYarn(root);
@@ -211,17 +214,13 @@ function createApp(name, verbose, version, useNpm, template) {
     process.exit(1);
   }
 
-  if (!semver.satisfies(process.version, '>=6.0.0')) {
+  if (!semver.satisfies(process.version, '>=8.0.0')) {
     console.log(
       chalk.yellow(
-        `You are using Node ${
-          process.version
-        } so the project will be bootstrapped with an old unsupported version of tools.\n\n` +
-          `Please update to Node 6 or higher for a better, fully supported experience.\n`
+        `You are using Node ${process.version}.\n\n` +
+          `Please update to Node 8 or higher for a better, fully supported experience.\n`
       )
     );
-    // Fall back to latest supported react-scripts on Node 4
-    version = 'react-scripts@0.9.x';
   }
 
   if (!useYarn) {
@@ -230,32 +229,23 @@ function createApp(name, verbose, version, useNpm, template) {
       if (npmInfo.npmVersion) {
         console.log(
           chalk.yellow(
-            `You are using npm ${
-              npmInfo.npmVersion
-            } so the project will be boostrapped with an old unsupported version of tools.\n\n` +
-              `Please update to npm 3 or higher for a better, fully supported experience.\n`
+            `You are using npm ${npmInfo.npmVersion}.\n\n` +
+              `Please update to npm 6 or higher for a better, fully supported experience.\n`
           )
         );
       }
-      // Fall back to latest supported react-scripts for npm 3
-      version = 'react-scripts@0.9.x';
     }
   }
   run(root, appName, version, verbose, originalDirectory, template, useYarn);
 }
 
-function isYarnAvailable() {
+function shouldUseYarn() {
   try {
     execSync('yarnpkg --version', { stdio: 'ignore' });
     return true;
   } catch (e) {
     return false;
   }
-}
-
-function shouldUseYarn(appDir) {
-  const mono = findMonorepo(appDir);
-  return (mono.isYarnWs && mono.isAppIncluded) || isYarnAvailable();
 }
 
 function install(root, useYarn, dependencies, verbose, isOnline) {
@@ -321,7 +311,31 @@ function run(
   useYarn
 ) {
   const packageToInstall = getInstallPackage(version, originalDirectory);
-  const allDependencies = ['react', 'react-dom', packageToInstall];
+  const allDependencies = [
+    'react',
+    'react-dom',
+    packageToInstall,
+    'git+https://github.hpe.com/infosight/shell-api',
+    'git+https://github.hpe.com/infosight/elmer',
+    'axios@0.17.0',
+    'classnames@2.2.5',
+    'history@4.7.2',
+    'moment@2.22.2',
+    'moment-timezone@0.5.20',
+    'numeral@2.0.6',
+    'object-hash@1.1.5',
+    'prop-types@15.5.8',
+    'react-autobind',
+    'react-redux',
+    'react-router@4.2.0',
+    'react-router-dom@4.2.2',
+    'redux',
+    'redux-devtools-extension',
+    'redux-thunk',
+    'styled-components@3.3.3',
+    'underscore',
+    'urijs',
+  ];
 
   console.log('Installing packages. This might take a couple of minutes.');
   getPackageName(packageToInstall)
@@ -408,7 +422,7 @@ function run(
 }
 
 function getInstallPackage(version, originalDirectory) {
-  let packageToInstall = 'react-scripts';
+  let packageToInstall = '@infosight/microapp-scripts';
   const validSemver = semver.valid(version);
   if (validSemver) {
     packageToInstall += `@${validSemver}`;
@@ -528,7 +542,7 @@ function checkNpmVersion() {
     npmVersion = execSync('npm --version')
       .toString()
       .trim();
-    hasMinNpm = semver.gte(npmVersion, '3.0.0');
+    hasMinNpm = semver.gte(npmVersion, '6.0.0');
   } catch (err) {
     // ignore
   }
