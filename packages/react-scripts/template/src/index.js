@@ -27,6 +27,6 @@ register({
    */
   async getExtensionContainer() {
     const module = await import('./bootstrapper/Microapp');
-    return module.Microapp;
+    return module.default;
   },
 });

@@ -37,7 +37,7 @@ class RouterExtension extends Component {
     handleUpdate() {
         [
             {
-                url: '/dashboards/hello-world',
+                url: buildUrl('dashboards', 'hello-world'),
                 router: addContexts(Router),
                 exact: false,
                 appId: process.env.REACT_APP_MICROAPP_ID,

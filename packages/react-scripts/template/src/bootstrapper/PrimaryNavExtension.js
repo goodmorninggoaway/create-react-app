@@ -16,20 +16,27 @@ class PrimaryNavExtension extends Component {
     }
 
     handleUpdate() {
+        const { match } = this.props;
         [
             {
                 menuId: 'dashboards',
-                id: 'hello-world',
+                id: process.env.REACT_APP_MICROAPP_ID,
                 content: [
                     {
-                        id: 'hello-world-1',
-                        title: 'Operational',
-                        url: buildUrl(match.url, '/dashboards/hello-world/operational'),
-                    },
-                    {
-                        id: 'hello-world-2',
-                        title: 'Executive',
-                        url: buildUrl(match.url, '/dashboards/hello-world/executive'),
+                        id: 'hello-world',
+                        title: 'Hello World',
+                        options: [
+                            {
+                                id: 'sample-1',
+                                title: 'Sample Page 1',
+                                url: buildUrl(match.url, '/dashboards/hello-world/page-1'),
+                            },
+                            {
+                                id: 'sample-2',
+                                title: 'Sample Page 2',
+                                url: buildUrl(match.url, '/dashboards/hello-world/page-2'),
+                            },
+                        ],
                     },
                 ],
             },

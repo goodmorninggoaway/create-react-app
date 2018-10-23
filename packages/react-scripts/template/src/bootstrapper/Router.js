@@ -6,12 +6,12 @@ import { StaticBold } from 'elmer/dist/components/StaticBold';
 import { SecondaryNavBar, NavItem, Title } from 'elmer/dist/components/SecondaryNavBar';
 import { pageBoundaryRouteRenderer } from 'elmer/dist/page';
 import { buildUrl } from 'elmer/dist/utils/url';
-import OperationalDashboard from '../dashboards/OperationalDashboard';
-import ExecutiveDashboard from '../dashboards/ExecutiveDashboard';
+import SamplePage1 from '../samples/SamplePage1';
+import SamplePage2 from '../samples/SamplePage2';
 
 const objects = [
-    { label: 'Operational', url: 'operational', component: OperationalDashboard, visible: true },
-    { label: 'Executive', url: 'executive', component: ExecutiveDashboard, visible: true },
+    { label: 'Sample Page 1', url: 'page-1', component: SamplePage1, visible: true },
+    { label: 'Sample Page 2', url: 'page-2', component: SamplePage2, visible: true },
 ];
 
 const Router = ({ match }) => (
@@ -38,7 +38,7 @@ const Router = ({ match }) => (
                         render={pageBoundaryRouteRenderer(component, label)}
                     />
                 ))}
-                <Redirect to={buildUrl(match.url, 'operational')} />
+                <Redirect to={buildUrl(match.url, 'sample-1')} />
             </Switch>
         </ScrollContainer.Scrollable>
     </ScrollContainer>
