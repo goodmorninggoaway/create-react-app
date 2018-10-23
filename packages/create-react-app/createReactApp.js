@@ -182,12 +182,13 @@ createApp(
 );
 
 function createApp(name, verbose, version, useNpm, template) {
-  const root = path.resolve(name);
-  const appName = path.basename(root);
+  const appName = `portal-${name}-frontend`;
+  const root = path.resolve(appName);
+  const microappId = path.basename(name);
 
   checkAppName(appName);
-  fs.ensureDirSync(name);
-  if (!isSafeToCreateProjectIn(root, name)) {
+  fs.ensureDirSync(appName);
+  if (!isSafeToCreateProjectIn(root, appName)) {
     process.exit(1);
   }
 
@@ -195,13 +196,16 @@ function createApp(name, verbose, version, useNpm, template) {
   console.log();
 
   const packageJson = {
-    name: appName,
-    version: '0.1.0',
-    private: true,
+    name: `@infosight/${appName}`,
+    version: '1.0.0',
   };
   fs.writeFileSync(
     path.join(root, 'package.json'),
     JSON.stringify(packageJson, null, 2) + os.EOL
+  );
+  fs.writeFileSync(
+    path.join(root, '.env'),
+    `REACT_APP_MICROAPP_ID=${microappId}` + os.EOL
   );
 
   const useYarn = useNpm ? false : shouldUseYarn(root);
@@ -321,7 +325,31 @@ function run(
   useYarn
 ) {
   const packageToInstall = getInstallPackage(version, originalDirectory);
-  const allDependencies = ['react', 'react-dom', packageToInstall];
+  const allDependencies = [
+      'react',
+      'react-dom',
+      packageToInstall,
+      'git+https://github.hpe.com/infosight/shell-api',
+      'git+https://github.hpe.com/infosight/elmer',
+      'axios@0.17.0',
+      'classnames@2.2.5',
+      'history@4.7.2',
+      'moment@2.22.2',
+      'moment-timezone@0.5.20',
+      'numeral@2.0.6',
+      'object-hash@1.1.5',
+      'prop-types@15.5.8',
+      'react-autobind',
+      'react-redux',
+      'react-router@4.2.0',
+      'react-router-dom@4.2.2',
+      'redux',
+      'redux-devtools-extension',
+      'redux-thunk',
+      'styled-components@3.3.3',
+      'underscore',
+      'urijs',
+  ];
 
   console.log('Installing packages. This might take a couple of minutes.');
   getPackageName(packageToInstall)

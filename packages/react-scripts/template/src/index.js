@@ -2,7 +2,7 @@ import './bootstrapper/setPublicPath';
 import { register } from '@infosight/shell-api/lib/Bootstrapper';
 
 register({
-  appId: 'microapp-id',
+  appId: process.env.REACT_APP_MICROAPP_ID,
 
   /**
    * Lifecycle function that should load the bare minimum needed to determine whether or not to continue
@@ -26,7 +26,7 @@ register({
    * @return {Promise<React.Component>}
    */
   async getExtensionContainer() {
-    const module = await import('./bootstrapper/MicroApp');
-    return module.default;
+    const module = await import('./bootstrapper/Microapp');
+    return module.Microapp;
   },
 });
