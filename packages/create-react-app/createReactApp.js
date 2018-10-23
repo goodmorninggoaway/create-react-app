@@ -215,13 +215,13 @@ function createApp(name, verbose, version, useNpm, template) {
     process.exit(1);
   }
 
-  if (!semver.satisfies(process.version, '>=6.0.0')) {
+  if (!semver.satisfies(process.version, '>=8.0.0')) {
     console.log(
       chalk.yellow(
         `You are using Node ${
           process.version
         } so the project will be bootstrapped with an old unsupported version of tools.\n\n` +
-          `Please update to Node 6 or higher for a better, fully supported experience.\n`
+          `Please update to Node 8 or higher for a better, fully supported experience.\n`
       )
     );
     // Fall back to latest supported react-scripts on Node 4
@@ -237,7 +237,7 @@ function createApp(name, verbose, version, useNpm, template) {
             `You are using npm ${
               npmInfo.npmVersion
             } so the project will be boostrapped with an old unsupported version of tools.\n\n` +
-              `Please update to npm 3 or higher for a better, fully supported experience.\n`
+              `Please update to npm 6 or higher for a better, fully supported experience.\n`
           )
         );
       }
@@ -326,29 +326,29 @@ function run(
 ) {
   const packageToInstall = getInstallPackage(version, originalDirectory);
   const allDependencies = [
-      'react',
-      'react-dom',
-      packageToInstall,
-      'git+https://github.hpe.com/infosight/shell-api',
-      'git+https://github.hpe.com/infosight/elmer',
-      'axios@0.17.0',
-      'classnames@2.2.5',
-      'history@4.7.2',
-      'moment@2.22.2',
-      'moment-timezone@0.5.20',
-      'numeral@2.0.6',
-      'object-hash@1.1.5',
-      'prop-types@15.5.8',
-      'react-autobind',
-      'react-redux',
-      'react-router@4.2.0',
-      'react-router-dom@4.2.2',
-      'redux',
-      'redux-devtools-extension',
-      'redux-thunk',
-      'styled-components@3.3.3',
-      'underscore',
-      'urijs',
+    'react',
+    'react-dom',
+    packageToInstall,
+    'git+https://github.hpe.com/infosight/shell-api',
+    'git+https://github.hpe.com/infosight/elmer',
+    'axios@0.17.0',
+    'classnames@2.2.5',
+    'history@4.7.2',
+    'moment@2.22.2',
+    'moment-timezone@0.5.20',
+    'numeral@2.0.6',
+    'object-hash@1.1.5',
+    'prop-types@15.5.8',
+    'react-autobind',
+    'react-redux',
+    'react-router@4.2.0',
+    'react-router-dom@4.2.2',
+    'redux',
+    'redux-devtools-extension',
+    'redux-thunk',
+    'styled-components@3.3.3',
+    'underscore',
+    'urijs',
   ];
 
   console.log('Installing packages. This might take a couple of minutes.');
@@ -436,7 +436,7 @@ function run(
 }
 
 function getInstallPackage(version, originalDirectory) {
-  let packageToInstall = 'react-scripts';
+  let packageToInstall = '@infosight/microapp-scripts';
   const validSemver = semver.valid(version);
   if (validSemver) {
     packageToInstall += `@${validSemver}`;
@@ -556,7 +556,7 @@ function checkNpmVersion() {
     npmVersion = execSync('npm --version')
       .toString()
       .trim();
-    hasMinNpm = semver.gte(npmVersion, '3.0.0');
+    hasMinNpm = semver.gte(npmVersion, '6.0.0');
   } catch (err) {
     // ignore
   }
