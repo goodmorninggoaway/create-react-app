@@ -217,14 +217,10 @@ function createApp(name, verbose, version, useNpm, template) {
   if (!semver.satisfies(process.version, '>=8.0.0')) {
     console.log(
       chalk.yellow(
-        `You are using Node ${
-          process.version
-        } so the project will be bootstrapped with an old unsupported version of tools.\n\n` +
+        `You are using Node ${process.version}.\n\n` +
           `Please update to Node 8 or higher for a better, fully supported experience.\n`
       )
     );
-    // Fall back to latest supported react-scripts on Node 4
-    version = 'react-scripts@0.9.x';
   }
 
   if (!useYarn) {
@@ -233,15 +229,11 @@ function createApp(name, verbose, version, useNpm, template) {
       if (npmInfo.npmVersion) {
         console.log(
           chalk.yellow(
-            `You are using npm ${
-              npmInfo.npmVersion
-            } so the project will be boostrapped with an old unsupported version of tools.\n\n` +
+            `You are using npm ${npmInfo.npmVersion}.\n\n` +
               `Please update to npm 6 or higher for a better, fully supported experience.\n`
           )
         );
       }
-      // Fall back to latest supported react-scripts for npm 3
-      version = 'react-scripts@0.9.x';
     }
   }
   run(root, appName, version, verbose, originalDirectory, template, useYarn);
