@@ -6,56 +6,62 @@ import { addMenu, removeMenu } from '@infosight/shell-api/lib/PrimaryNav';
 import { buildUrl } from 'elmer/dist/utils/url';
 
 class PrimaryNavExtension extends Component {
-    constructor(props) {
-        super(props);
-        autobind(this);
-    }
+  constructor(props) {
+    super(props);
+    autobind(this);
+  }
 
-    componentDidMount() {
-        this.handleUpdate();
-    }
+  componentDidMount() {
+    this.handleUpdate();
+  }
 
-    handleUpdate() {
-        const { match } = this.props;
-        [
-            {
-                menuId: 'dashboards',
-                id: process.env.REACT_APP_MICROAPP_ID,
-                content: [
-                    {
-                        id: 'hello-world',
-                        title: 'Hello World',
-                        options: [
-                            {
-                                id: 'sample-1',
-                                title: 'Sample Page 1',
-                                url: buildUrl(match.url, '/dashboards/hello-world/page-1'),
-                            },
-                            {
-                                id: 'sample-2',
-                                title: 'Sample Page 2',
-                                url: buildUrl(match.url, '/dashboards/hello-world/page-2'),
-                            },
-                        ],
-                    },
-                ],
-            },
-        ].forEach(extension => {
-            if (extension.content) {
-                addMenu(extension);
-            } else {
-                removeMenu(extension);
-            }
-        });
-    }
+  handleUpdate() {
+    const { match } = this.props;
+    [
+      {
+        menuId: 'dashboards',
+        id: process.env.REACT_APP_MICROAPP_ID,
+        content: [
+          {
+            id: process.env.REACT_APP_MICROAPP_ID,
+            title: 'Hello World',
+            options: [
+              {
+                id: 'sample-1',
+                title: 'Sample Page 1',
+                url: buildUrl(
+                  match.url,
+                  `/dashboards/${process.env.REACT_APP_MICROAPP_ID}/page-1`
+                ),
+              },
+              {
+                id: 'sample-2',
+                title: 'Sample Page 2',
+                url: buildUrl(
+                  match.url,
+                  `/dashboards/${process.env.REACT_APP_MICROAPP_ID}/page-2`
+                ),
+              },
+            ],
+          },
+        ],
+      },
+    ].forEach(extension => {
+      if (extension.content) {
+        addMenu(extension);
+      } else {
+        removeMenu(extension);
+      }
+    });
+  }
 
-    render() {
-        return null;
-    }
+  render() {
+    return null;
+  }
 }
 
 PrimaryNavExtension.propTypes = {
-    match: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default withRouter(PrimaryNavExtension);

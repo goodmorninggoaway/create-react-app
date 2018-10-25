@@ -15,46 +15,46 @@ import getStore from '../utils/getStore';
  * @return {function(*): *}
  */
 function addContexts(WrappedComponent) {
-    return props => (
-        <Provider store={getStore()}>
-            <ThemeProvider>
-                <WrappedComponent {...props} />
-            </ThemeProvider>
-        </Provider>
-    );
+  return props => (
+    <Provider store={getStore()}>
+      <ThemeProvider>
+        <WrappedComponent {...props} />
+      </ThemeProvider>
+    </Provider>
+  );
 }
 
 class RouterExtension extends Component {
-    constructor(props) {
-        super(props);
-        autobind(this);
-    }
+  constructor(props) {
+    super(props);
+    autobind(this);
+  }
 
-    componentDidMount() {
-        this.handleUpdate();
-    }
+  componentDidMount() {
+    this.handleUpdate();
+  }
 
-    handleUpdate() {
-        [
-            {
-                url: buildUrl('dashboards', 'hello-world'),
-                router: addContexts(Router),
-                exact: false,
-                appId: process.env.REACT_APP_MICROAPP_ID,
-            },
-        ].forEach(extension => {
-            if (extension.router) {
-                addRouter(extension);
-            } else {
-                removeRouter(extension);
-            }
-        });
-    }
+  handleUpdate() {
+    [
+      {
+        url: buildUrl('dashboards', process.env.REACT_APP_MICROAPP_ID),
+        router: addContexts(Router),
+        exact: false,
+        appId: process.env.REACT_APP_MICROAPP_ID,
+      },
+    ].forEach(extension => {
+      if (extension.router) {
+        addRouter(extension);
+      } else {
+        removeRouter(extension);
+      }
+    });
+  }
 
-    // Always return null
-    render() {
-        return null;
-    }
+  // Always return null
+  render() {
+    return null;
+  }
 }
 
 export default RouterExtension;
