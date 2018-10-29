@@ -114,7 +114,9 @@ checkBrowsers(paths.appPath)
       if (isInteractive) {
         clearConsole();
       }
-      console.log(chalk.cyan('Starting the development server...\n'));
+      console.log(
+        chalk.cyan('Starting the development server on port ' + port + '...\n')
+      );
     });
 
     ['SIGINT', 'SIGTERM'].forEach(function(sig) {
