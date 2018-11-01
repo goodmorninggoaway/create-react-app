@@ -245,9 +245,6 @@ module.exports = {
                   fallback: false,
                 },
               },
-              // This loader parallelizes code compilation, it is optional but
-              // improves compile time on larger projects
-              require.resolve('thread-loader'),
               {
                 loader: require.resolve('babel-loader'),
                 options: {
