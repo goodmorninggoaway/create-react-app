@@ -1,6 +1,6 @@
 {
   "name": "@infosight/create-microapp",
-  "version": "1.1.1",
+  "version": "2.1.1",
   "keywords": [
     "react"
   ],
@@ -15,7 +15,8 @@
   },
   "files": [
     "index.js",
-    "createReactApp.js"
+    "createReactApp.js",
+    "yarn.lock.cached"
   ],
   "bin": {
     "create-react-app": "./index.js"

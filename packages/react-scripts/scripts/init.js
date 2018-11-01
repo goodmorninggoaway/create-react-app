@@ -21,6 +21,7 @@ const execSync = require('child_process').execSync;
 const spawn = require('react-dev-utils/crossSpawn');
 const { defaultBrowsers } = require('react-dev-utils/browsersHelper');
 const os = require('os');
+const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 
 function isInGitRepository() {
   try {
@@ -94,6 +95,7 @@ module.exports = function(
     'git+https://github.hpe.com/infosight/shell-api';
   appPackage.dependencies['elmer'] =
     'git+https://github.hpe.com/infosight/elmer';
+  const useTypeScript = appPackage.dependencies['typescript'] != null;
 
   // Setup the script rules
   appPackage.scripts = {
@@ -127,7 +129,7 @@ module.exports = function(
   // Copy the files for the user
   const templatePath = template
     ? path.resolve(originalDirectory, template)
-    : path.join(ownPath, 'template');
+    : path.join(ownPath, useTypeScript ? 'template-typescript' : 'template');
   if (fs.existsSync(templatePath)) {
     fs.copySync(templatePath, appPath);
   } else {
@@ -195,6 +197,10 @@ module.exports = function(
       console.error(`\`${command} ${args.join(' ')}\` failed`);
       return;
     }
+  }
+
+  if (useTypeScript) {
+    verifyTypeScriptSetup();
   }
 
   if (tryGitInit(appPath)) {
