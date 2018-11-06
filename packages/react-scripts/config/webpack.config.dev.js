@@ -25,6 +25,8 @@ const packageJson = require(paths.appPackageJson);
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const BuildInfoPlugin = require('@infosight/build-info-webpack-plugin');
+
 // @remove-on-eject-begin
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
@@ -440,6 +442,8 @@ module.exports = {
       fileName: 'asset-manifest.json',
       publicPath: publicPath,
     }),
+    // Generate a build-info.json file that contains dependency summaries, git info and a timestamp
+    new BuildInfoPlugin(),
     // This allows the shell to auto-reload and find
     // port: '*' enables the plugin to find an available port for livereload
     new LiveReloadPlugin({
