@@ -91,10 +91,8 @@ module.exports = function(
   // Copy over some of the devDependencies
   appPackage.dependencies = appPackage.dependencies || {};
 
-  appPackage.dependencies['@infosight/shell-api'] =
-    'git+https://github.hpe.com/infosight/shell-api';
-  appPackage.dependencies['elmer'] =
-    'git+https://github.hpe.com/infosight/elmer';
+  appPackage.dependencies['@infosight/shell-api'] = '^2.2.1';
+  appPackage.dependencies['@infosight/elmer'] = '^3.1.0';
   const useTypeScript = appPackage.dependencies['typescript'] != null;
 
   // Setup the script rules
