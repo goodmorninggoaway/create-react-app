@@ -9,6 +9,7 @@ sidebar_label: Troubleshooting
 When you save a file while `npm start` is running, the browser should refresh with the updated code.<br>
 If this doesn’t happen, try one of the following workarounds:
 
+- Check that your file is imported by you entrypoint. TypeScript will show errors on any of your source files, but webpack only reloads your files if they are directly or indirectly imported by one of your entrypoints.
 - If your project is in a Dropbox folder, try moving it out.
 - If the watcher doesn’t see a file called `index.js` and you’re referencing it by the folder name, you [need to restart the watcher](https://github.com/facebook/create-react-app/issues/1164) due to a Webpack bug.
 - Some editors like Vim and IntelliJ have a “safe write” feature that currently breaks the watcher. You will need to disable it. Follow the instructions in [“Adjusting Your Text Editor”](https://webpack.js.org/guides/development/#adjusting-your-text-editor).
@@ -28,7 +29,7 @@ We recommend deleting `node_modules` in your project and running `npm install` (
 - [facebook/watchman#358](https://github.com/facebook/watchman/issues/358)
 - [ember-cli/ember-cli#6259](https://github.com/ember-cli/ember-cli/issues/6259)
 
-It is reported that installing Watchman 4.7.0 or newer fixes the issue. If you use [Homebrew](http://brew.sh/), you can run these commands to update it:
+It is reported that installing Watchman 4.7.0 or newer fixes the issue. If you use [Homebrew](https://brew.sh/), you can run these commands to update it:
 
 ```
 watchman shutdown-server
