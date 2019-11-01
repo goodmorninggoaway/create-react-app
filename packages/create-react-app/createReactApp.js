@@ -231,9 +231,7 @@ function createApp(
   if (!semver.satisfies(process.version, '>=8.10.0')) {
     console.log(
       chalk.yellow(
-        `You are using Node ${
-          process.version
-        } so the project will be bootstrapped with an old unsupported version of tools.\n\n` +
+        `You are using Node ${process.version} so the project will be bootstrapped with an old unsupported version of tools.\n\n` +
           `Please update to Node 8.10 or higher for a better, fully supported experience.\n`
       )
     );
@@ -257,9 +255,7 @@ function createApp(
       if (yarnInfo.yarnVersion) {
         console.log(
           chalk.yellow(
-            `You are using Yarn ${
-              yarnInfo.yarnVersion
-            } together with the --use-pnp flag, but Plug'n'Play is only supported starting from the 1.12 release.\n\n` +
+            `You are using Yarn ${yarnInfo.yarnVersion} together with the --use-pnp flag, but Plug'n'Play is only supported starting from the 1.12 release.\n\n` +
               `Please update to Yarn 1.12 or higher for a better, fully supported experience.\n`
           )
         );
@@ -389,7 +385,6 @@ function run(
       packageToInstall,
       '@infosight/shell-api',
       '@infosight/elmer',
-      'axios@0.17.0',
       'classnames@2.2.5',
       'history@4.7.2',
       'moment@2.22.2',
@@ -406,7 +401,6 @@ function run(
       'redux-thunk',
       'styled-components@3.3.3',
       'underscore',
-      'urijs',
     ];
     if (useTypescript) {
       allDependencies.push(
