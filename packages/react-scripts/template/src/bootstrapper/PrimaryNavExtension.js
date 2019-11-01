@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import autobind from 'react-autobind';
 import { withRouter } from 'react-router-dom';
 import { addMenu, removeMenu } from '@infosight/shell-api/lib/PrimaryNav';
-import { buildUrl } from 'elmer/dist/utils/url';
+import { buildUrl } from '@infosight/elmer/dist/utils/url';
 
 class PrimaryNavExtension extends Component {
   constructor(props) {

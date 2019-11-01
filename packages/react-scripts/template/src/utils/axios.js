@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { buildUrl } from 'elmer/dist/utils/url';
 import { logOut as requestLogout } from '@infosight/shell-api/lib/UserProfile';
 
 const axiosInstance = axios.create();

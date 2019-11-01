@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import autobind from 'react-autobind';
 import { Provider } from 'react-redux';
 import { removeRouter, addRouter } from '@infosight/shell-api/lib/Router';
-import { ThemeProvider } from 'elmer/dist/components/ThemeProvider';
-import { buildUrl } from 'elmer/dist/utils/url';
+import { ThemeProvider } from '@infosight/elmer/dist/components/ThemeProvider';
+import { buildUrl } from '@infosight/elmer/dist/utils/url';
 import Router from './Router';
 import getStore from '../utils/getStore';
 

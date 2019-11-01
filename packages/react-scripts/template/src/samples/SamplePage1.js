@@ -1,5 +1,5 @@
 import React from 'react';
-import { AwaitingImplementation } from 'elmer/dist/page';
+import { AwaitingImplementation } from '@infosight/elmer/dist/page';
 import classnames from 'classnames/bind';
 import style from './SamplePage1.module.scss';
 
