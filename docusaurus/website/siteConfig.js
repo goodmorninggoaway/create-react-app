@@ -11,10 +11,10 @@
 const siteConfig = {
   title: 'Create React App', // Title for your website.
   tagline: 'Set up a modern web app by running one command.',
-  url: 'https://facebook.github.io', // Your website URL
   // For github.io type URLs, you would set the url and baseUrl like:
-  url: 'https://facebook.github.io',
-  baseUrl: '/create-react-app/',
+  url: 'https://create-react-app.dev',
+  baseUrl: '/',
+  cname: 'create-react-app.dev',
   editUrl:
     'https://github.com/facebook/create-react-app/edit/master/docusaurus/docs/',
 
@@ -27,7 +27,7 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    { doc: 'getting-started', label: 'Getting Started' },
+    { doc: 'getting-started', label: 'Docs' },
     { href: 'https://reactjs.org/community/support.html', label: 'Help' },
     {
       href: 'https://www.github.com/facebook/create-react-app',
@@ -88,6 +88,11 @@ const siteConfig = {
     apiKey: '3be60f4f8ffc24c75da84857d6323791',
     indexName: 'create-react-app',
   },
+
+  scrollToTop: true,
+  enableUpdateTime: true,
+  enableUpdateBy: true,
+  docsSideNavCollapsible: true,
 };
 
 module.exports = siteConfig;

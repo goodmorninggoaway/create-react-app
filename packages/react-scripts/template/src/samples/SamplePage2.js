@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from 'elmer/dist/components/Box';
+import { Box } from '@infosight/elmer/dist/components/Box';
 
 const SamplePage2 = () => (
   <Box background="white" margin="small">

@@ -1,28 +1,10 @@
-import React, { Component } from 'react';
+import { Component, lazy } from 'react';
 import autobind from 'react-autobind';
-import { Provider } from 'react-redux';
 import { removeRouter, addRouter } from '@infosight/shell-api/lib/Router';
-import { ThemeProvider } from 'elmer/dist/components/ThemeProvider';
-import { buildUrl } from 'elmer/dist/utils/url';
-import Router from './Router';
-import getStore from '../utils/getStore';
+import { buildUrl } from '@infosight/elmer/dist/utils/url';
+import { pageBoundaryRouteRenderer } from '@infosight/elmer/dist/page';
 
-/**
- * HOC (Higher-Order Component) that adds any needed contexts.
- * `Provider` adds the redux store to contexts so you can use the `connect` component.
- * `ThemeProvider` applies the correct styling
- * @param WrappedComponent
- * @return {function(*): *}
- */
-function addContexts(WrappedComponent) {
-  return props => (
-    <Provider store={getStore()}>
-      <ThemeProvider>
-        <WrappedComponent {...props} />
-      </ThemeProvider>
-    </Provider>
-  );
-}
+const Router = lazy(() => import('./Router'));
 
 class RouterExtension extends Component {
   constructor(props) {
@@ -38,7 +20,7 @@ class RouterExtension extends Component {
     [
       {
         url: buildUrl('dashboards', process.env.REACT_APP_MICROAPP_ID),
-        router: addContexts(Router),
+        router: pageBoundaryRouteRenderer(Router),
         exact: false,
         appId: process.env.REACT_APP_MICROAPP_ID,
       },
