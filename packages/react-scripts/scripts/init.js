@@ -92,7 +92,7 @@ module.exports = function(
   appPackage.dependencies = appPackage.dependencies || {};
 
   appPackage.dependencies['@infosight/shell-api'] = '^2.2.1';
-  appPackage.dependencies['@infosight/elmer'] = '^3.1.0';
+  appPackage.dependencies['@infosight/elmer'] = '^4.0.2';
   const useTypeScript = appPackage.dependencies['typescript'] != null;
 
   // Setup the script rules
