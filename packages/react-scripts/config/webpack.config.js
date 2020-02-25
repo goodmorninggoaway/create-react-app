@@ -298,11 +298,23 @@ module.exports = function(webpackEnv) {
     },
     // All microapps should share the same version of a very limited subset of global dependencies.
     // Typically, these should be limited to dependencies that cannot be scoped and cannot have multiple coexisting versions.
-    externals: {
+    externals: (function(externals) {
+      // Backward-compatible support for Grommet@2.beta5 + styled-compoments@3
+      // Microapps that have not upgraded will still use the global `window.styled`
+      // Microapps that have upgraded should explicitly pass a value, currently '3'|'5' are supported by the shell.
+      // If a value is not passed, the bundle will include styled-components, which means that process.env.SC_ATTR is required.
+      // TODO enforce the previous
+      const styledComponentsVersion =
+        process.env.REACT_APP_STYLED_COMPONENTS_VERSION ||
+        process.env.STYLED_COMPONENTS_VERSION;
+      if (styledComponentsVersion && styledComponentsVersion !== 'local') {
+        externals['styled-components'] = `styled_${styledComponentsVersion}xx`;
+      }
+      return externals;
+    })({
       react: 'React',
       'react-dom': 'ReactDOM',
-      'styled-components': 'styled',
-    },
+    }),
     resolve: {
       // This allows you to set a fallback for where Webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
