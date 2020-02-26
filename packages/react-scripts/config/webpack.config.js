@@ -298,11 +298,13 @@ module.exports = function(webpackEnv) {
     },
     // All microapps should share the same version of a very limited subset of global dependencies.
     // Typically, these should be limited to dependencies that cannot be scoped and cannot have multiple coexisting versions.
-    externals: {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-      ...getWebpackExternalsForStyledComponents(),
-    },
+    externals: [
+      {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+      },
+      getWebpackExternalsForStyledComponents(),
+    ],
     resolve: {
       // This allows you to set a fallback for where Webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
