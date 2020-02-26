@@ -4,7 +4,7 @@
 
 `npx lerna bootstrap`
 
-# Developing
+# Developing for HPE InfoSight Microapps
 
 Everything you need to edit is probably in [react-scripts](packages/react-scripts). You can test locally
 with `npm link`.
@@ -14,8 +14,20 @@ cd packages/react-scripts
 npm link
 ```
 
-If you have problems, delete [node_modules](packages/react-scripts/node_modules) and run `npx lerna bootstrap` again.
-You shouldn't have to run `npm install` or `yarn`. Basically, always use lerna or expect problems.
+If you have problems, run `npx lerna clean && npx lerna bootstrap` again.
+Do not run `npm install` or `yarn`. Always use lerna or expect problems.
+
+# Publishing
+
+Since this repo is on public GitHub, you need to publish packages manually.
+
+1. Bump the version in the packages `package.json` file. Do not use `lerna version`
+1. Very likely, if you're editing this repo, you have push privileges on our private npm registry. If not, a maintainer should probably handle the publishing.
+1. Publish using `npm publish`.
+   - If you need to publish a pre-release version, be sure to use appropriate versioning and set a tag. Otherwise your beta becomes somebody's prod version
+     if they aren't commiting the `package-lock.json` file in thier microapp.
+   - `npm publish --tag prerelease`
+   - If you forget, use [`npm dist-tag`](https://docs.npmjs.com/cli/dist-tag) to move the `latest` tag and set `prerelease`
 
 ## Everything below this point is from create-react-app
 
