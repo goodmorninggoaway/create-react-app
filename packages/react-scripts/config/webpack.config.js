@@ -37,7 +37,9 @@ const eslint = require('eslint');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 const postcssNormalize = require('postcss-normalize');
-
+const {
+  getWebpackExternalsForStyledComponents,
+} = require('./libraryCompatibility');
 const appPackageJson = require(paths.appPackageJson);
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -298,25 +300,11 @@ module.exports = function(webpackEnv) {
     },
     // All microapps should share the same version of a very limited subset of global dependencies.
     // Typically, these should be limited to dependencies that cannot be scoped and cannot have multiple coexisting versions.
-    externals: (function(externals) {
-      // Backward-compatible support for Grommet@2.beta5 + styled-compoments@3
-      // Microapps that have not upgraded to the latest version of @infosight/microapp-scripts will still use the global `window.styled`
-      // Microapps that have upgraded should explicitly pass a value; currently '3xx'|'5xx' are supported by the shell.
-      //    However, this is forgiving and defaults back to 3xx
-      // If a value "bundled" is passed, the bundle will include styled-components, which means that process.env.SC_ATTR is required.
-      const styledComponentsVersion =
-        process.env.REACT_APP_STYLED_COMPONENTS_VERSION ||
-        process.env.STYLED_COMPONENTS_VERSION ||
-        '3xx';
-
-      if (styledComponentsVersion && styledComponentsVersion !== 'bundled') {
-        externals['styled-components'] = `styled_${styledComponentsVersion}`;
-      }
-      return externals;
-    })({
+    externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
-    }),
+      ...getWebpackExternalsForStyledComponents(),
+    },
     resolve: {
       // This allows you to set a fallback for where Webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
