@@ -300,15 +300,17 @@ module.exports = function(webpackEnv) {
     // Typically, these should be limited to dependencies that cannot be scoped and cannot have multiple coexisting versions.
     externals: (function(externals) {
       // Backward-compatible support for Grommet@2.beta5 + styled-compoments@3
-      // Microapps that have not upgraded will still use the global `window.styled`
-      // Microapps that have upgraded should explicitly pass a value, currently '3'|'5' are supported by the shell.
-      // If a value is not passed, the bundle will include styled-components, which means that process.env.SC_ATTR is required.
-      // TODO enforce the previous
+      // Microapps that have not upgraded to the latest version of @infosight/microapp-scripts will still use the global `window.styled`
+      // Microapps that have upgraded should explicitly pass a value; currently '3xx'|'5xx' are supported by the shell.
+      //    However, this is forgiving and defaults back to 3xx
+      // If a value "bundled" is passed, the bundle will include styled-components, which means that process.env.SC_ATTR is required.
       const styledComponentsVersion =
         process.env.REACT_APP_STYLED_COMPONENTS_VERSION ||
-        process.env.STYLED_COMPONENTS_VERSION;
-      if (styledComponentsVersion && styledComponentsVersion !== 'local') {
-        externals['styled-components'] = `styled_${styledComponentsVersion}xx`;
+        process.env.STYLED_COMPONENTS_VERSION ||
+        '3xx';
+
+      if (styledComponentsVersion && styledComponentsVersion !== 'bundled') {
+        externals['styled-components'] = `styled_${styledComponentsVersion}`;
       }
       return externals;
     })({
