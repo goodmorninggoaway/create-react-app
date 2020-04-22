@@ -4,10 +4,10 @@ import { ThemeProvider } from '@infosight/elmer/dist/components/ThemeProvider';
 import getStore from './getStore';
 
 // this function will just take a component and return a new component that has any needed contexts in its component tree
-export default WrappedComponent => () => (
+export default WrappedComponent => props => (
   <Provider store={getStore()}>
     <ThemeProvider>
-      <WrappedComponent />
+      <WrappedComponent {...props} />
     </ThemeProvider>
   </Provider>
 );

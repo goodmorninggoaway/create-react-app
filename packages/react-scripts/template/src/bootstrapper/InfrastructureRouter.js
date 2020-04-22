@@ -22,7 +22,7 @@ class InfrastructureRouter extends Component {
     return (
       <Async loading={loadingObjects}>
         <NoData hasData={loadedObjects}>
-          <InfrastructurePages productInterface={productInterface} />
+          {() => <InfrastructurePages productInterface={productInterface} />}
         </NoData>
       </Async>
     );

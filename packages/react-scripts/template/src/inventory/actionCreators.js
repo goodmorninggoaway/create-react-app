@@ -98,7 +98,6 @@ export const processInventory = data => {
 };
 
 export const fetchInventory = () => async dispatch => {
-  console.log('fetching inventory');
   const { dispatchStart, dispatchSuccess, dispatchError } = actionsFor(
     FETCH_INVENTORY,
     dispatch

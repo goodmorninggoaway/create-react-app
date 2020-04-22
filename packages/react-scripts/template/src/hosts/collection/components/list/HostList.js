@@ -16,7 +16,6 @@ const HostList = ({ hosts, hostsLoading }) => (
         desc: false,
       },
     ]}
-    ignoreme={console.log('Rendering HostList')}
   />
 );
 
