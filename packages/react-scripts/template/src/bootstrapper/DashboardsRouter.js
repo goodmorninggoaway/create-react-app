@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect, Provider } from 'react-redux';
-import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, Switch, NavLink, Redirect, withRouter } from 'react-router-dom';
 import ScrollContainer from '@infosight/elmer/dist/components/ScrollContainer';
 import { StaticBold } from '@infosight/elmer/dist/components/StaticBold';
 import {
@@ -10,29 +10,11 @@ import {
   Title,
 } from '@infosight/elmer/dist/components/SecondaryNavBar';
 import { pageBoundaryRouteRenderer } from '@infosight/elmer/dist/page';
-import { ThemeProvider } from '@infosight/elmer/dist/components/ThemeProvider';
 import { buildUrl } from '@infosight/elmer/dist/utils/url';
-import getStore from '../utils/getStore';
+import wrapRouter from '../utils/wrapRouter';
 import { authzSelector } from '../user/reducer';
 import SamplePage1 from '../samples/SamplePage1';
 import SamplePage2 from '../samples/SamplePage2';
-
-/**
- * HOC (Higher-Order Component) that adds any needed contexts.
- * `Provider` adds the redux store to contexts so you can use the `connect` component.
- * `ThemeProvider` applies the correct styling
- * @param WrappedComponent
- * @return {function(*): *}
- */
-function addContexts(WrappedComponent) {
-  return props => (
-    <Provider store={getStore()}>
-      <ThemeProvider>
-        <WrappedComponent {...props} />
-      </ThemeProvider>
-    </Provider>
-  );
-}
 
 const objects = [
   {
@@ -48,7 +30,7 @@ const objects = [
   },
 ];
 
-const Router = ({ match, authz }) => (
+const DashboardsRouter = ({ match, authz }) => (
   <ScrollContainer>
     <ScrollContainer.Fixed>
       <SecondaryNavBar>
@@ -81,7 +63,7 @@ const Router = ({ match, authz }) => (
   </ScrollContainer>
 );
 
-Router.propTypes = {
+DashboardsRouter.propTypes = {
   match: PropTypes.object.isRequired,
   authz: PropTypes.shape({ filter: PropTypes.func, evaluate: PropTypes.func })
     .isRequired,
@@ -91,4 +73,6 @@ const mapStateToProps = state => ({
   authz: authzSelector(state),
 });
 
-export default addContexts(connect(mapStateToProps)(Router));
+export default wrapRouter(
+  withRouter(connect(mapStateToProps)(DashboardsRouter))
+);

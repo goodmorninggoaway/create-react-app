@@ -5,10 +5,12 @@ import autobind from 'react-autobind';
 import { withRouter } from 'react-router-dom';
 import { addMenu, removeMenu } from '@infosight/shell-api/lib/PrimaryNav';
 import { buildUrl } from '@infosight/elmer/dist/utils/url';
+import productInterface from './productInterface';
 import { authzSelector } from '../user/reducer';
 import { onShellStateUpdate } from '../user/utils';
 
 const ID = process.env.REACT_APP_MICROAPP_ID;
+
 class PrimaryNavExtension extends Component {
   constructor(props) {
     super(props);
@@ -30,24 +32,18 @@ class PrimaryNavExtension extends Component {
     const { authz, match } = this.props;
     const options = authz.filter([
       {
-        id: process.env.REACT_APP_MICROAPP_ID,
+        id: ID,
         title: 'Hello World',
         options: authz.filter([
           {
             id: 'sample-1',
             title: 'Sample Page 1',
-            url: buildUrl(
-              match.url,
-              `/dashboards/${process.env.REACT_APP_MICROAPP_ID}/page-1`
-            ),
+            url: buildUrl(match.url, `/dashboards/${ID}/page-1`),
           },
           {
             id: 'sample-2',
             title: 'Sample Page 2',
-            url: buildUrl(
-              match.url,
-              `/dashboards/${process.env.REACT_APP_MICROAPP_ID}/page-2`
-            ),
+            url: buildUrl(match.url, `/dashboards/${ID}/page-2`),
             access: { userRealm: 'INTERNAL' },
           },
         ]),
@@ -58,8 +54,31 @@ class PrimaryNavExtension extends Component {
   }
 
   getInfrastructure() {
-    // eslint-disable-line class-methods-use-this
-    return null;
+    const { authz, match } = this.props;
+    const options = authz.filter([
+      {
+        id: 'storage/sample',
+        title: productInterface.attributes.name,
+        options: productInterface.getNavRoutes().map(({ type, route }) => ({
+          id: route,
+          url: buildUrl(
+            match.url,
+            'infrastructure',
+            'storage',
+            'sample',
+            route
+          ),
+          title: productInterface.getPluralTitle(type),
+          preserveQueries: productInterface.attributes.preserveQueries,
+        })),
+      },
+    ]);
+
+    if (!options.length) {
+      return null;
+    }
+
+    return options.map(x => ({ tier: 'Storage', options: x }));
   }
 
   getResources() {

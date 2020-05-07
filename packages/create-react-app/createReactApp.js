@@ -401,6 +401,7 @@ function run(
       'redux-thunk',
       'styled-components@3.3.3',
       'underscore',
+      'urijs',
     ];
     if (useTypescript) {
       allDependencies.push(
