@@ -37,7 +37,9 @@ const eslint = require('eslint');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 const postcssNormalize = require('postcss-normalize');
-
+const {
+  getWebpackExternalsForStyledComponents,
+} = require('./libraryCompatibility');
 const appPackageJson = require(paths.appPackageJson);
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -188,8 +190,6 @@ module.exports = function(webpackEnv) {
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
-      // Fix WebWorkers: https://github.com/webpack/webpack/issues/6642
-      globalObject: 'self',
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
         ? info =>
@@ -298,11 +298,13 @@ module.exports = function(webpackEnv) {
     },
     // All microapps should share the same version of a very limited subset of global dependencies.
     // Typically, these should be limited to dependencies that cannot be scoped and cannot have multiple coexisting versions.
-    externals: {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-      'styled-components': 'styled',
-    },
+    externals: [
+      {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+      },
+      getWebpackExternalsForStyledComponents(),
+    ],
     resolve: {
       // This allows you to set a fallback for where Webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
