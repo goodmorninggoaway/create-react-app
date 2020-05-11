@@ -48,10 +48,6 @@ const webpackDevClientEntry = require.resolve(
   'react-dev-utils/webpackHotDevClient'
 );
 
-// Some apps do not need the benefits of saving a web request, so not inlining the chunk
-// makes for a smoother build process.
-const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
-
 const isExtendingEslintConfig = process.env.EXTEND_ESLINT === 'true';
 
 const imageInlineSizeLimit = parseInt(
@@ -645,14 +641,14 @@ module.exports = function(webpackEnv) {
       // This is necessary to emit hot updates (currently CSS only):
       isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
       // This allows the shell to auto-reload and find
-      // port: '*' enables the plugin to find an available port for livereload
-      // TODO: test if reactrefresh can replace livereload
-      // isEnvDevelopment &&
-      //   new LiveReloadPlugin({
-      //     appendScriptTag: true,
-      //     hostname: 'localhost',
-      //     protocol: 'http',
-      //     port: '*',
+      // port: 0 enables the plugin to find an available port for livereload
+      isEnvDevelopment &&
+        new LiveReloadPlugin({
+          appendScriptTag: true,
+          hostname: 'localhost',
+          protocol: 'http',
+          port: 0,
+        }),
       // Experimental hot reloading for React .
       // https://github.com/facebook/react/tree/master/packages/react-refresh
       isEnvDevelopment &&
