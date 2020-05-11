@@ -7,7 +7,6 @@ import { addHome } from '@infosight/shell-api/lib/Home';
 import { buildUrl } from '@infosight/elmer/dist/utils/url';
 import { authzSelector } from '../user/reducer';
 
-
 class HomeExtension extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +21,8 @@ class HomeExtension extends Component {
     this.handleUpdate();
   }
 
-  handleUpdate() { // eslint-disable-line class-methods-use-this
+  handleUpdate() {
+    // eslint-disable-line class-methods-use-this
     const { authz, match } = this.props;
     addHome({
       id: process.env.REACT_APP_MICROAPP_ID,

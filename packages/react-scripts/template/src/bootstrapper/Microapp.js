@@ -1,13 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import getStore from '../utils/getStore';
+import store from './store';
 import ShellStateCache from './ShellStateCache';
 import PrimaryNavExtension from './PrimaryNavExtension';
 import RouterExtension from './RouterExtension';
 import HomeExtension from './HomeExtension';
 
 const Microapp = () => (
-  <Provider store={getStore()}>
+  <Provider store={store}>
     <ShellStateCache>
       <PrimaryNavExtension />
       <RouterExtension />

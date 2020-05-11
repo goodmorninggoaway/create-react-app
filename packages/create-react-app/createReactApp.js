@@ -218,7 +218,10 @@ function createApp(
   );
   fs.writeFileSync(
     path.join(root, '.env'),
-    `REACT_APP_MICROAPP_ID=${microappId}` + os.EOL
+    `REACT_APP_MICROAPP_ID=${microappId}` +
+      os.EOL +
+      'EXTEND_ESLINT=true' +
+      os.EOL
   );
 
   const useYarn = useNpm ? false : shouldUseYarn();

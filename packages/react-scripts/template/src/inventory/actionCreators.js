@@ -2,8 +2,7 @@ import { actionsFor } from '@infosight/elmer/dist/utils/redux';
 import { FETCH_INVENTORY, OBJECTS, RESET } from './constants';
 
 const ROOT = '__ROOT';
-const buildObjectIndex = (...objectTypes) =>
-  objectTypes.reduce((memo, name) => ({ ...memo, [name]: {} }), {});
+const buildObjectIndex = (...objectTypes) => objectTypes.reduce((memo, name) => ({ ...memo, [name]: {} }), {});
 const PARENT_RELATIONSHIP = 1;
 const ASSOCIATIVE_RELATIONSHIP = 2;
 
@@ -27,13 +26,9 @@ export const processInventory = data => {
 
   const addOwnerRelation = (owner, ownee) => {
     topology[owner.type][owner.id] = topology[owner.type][owner.id] || {};
-    topology[owner.type][owner.id].children =
-      topology[owner.type][owner.id].children || {};
-    topology[owner.type][owner.id].children[ownee.type] =
-      topology[owner.type][owner.id].children[ownee.type] || [];
-    if (
-      !topology[owner.type][owner.id].children[ownee.type].includes(ownee.id)
-    ) {
+    topology[owner.type][owner.id].children = topology[owner.type][owner.id].children || {};
+    topology[owner.type][owner.id].children[ownee.type] = topology[owner.type][owner.id].children[ownee.type] || [];
+    if (!topology[owner.type][owner.id].children[ownee.type].includes(ownee.id)) {
       topology[owner.type][owner.id].children[ownee.type].push(ownee.id);
     }
 
@@ -44,8 +39,7 @@ export const processInventory = data => {
   const addAssociativeRelation = (a, b) => {
     topology[a.type][a.id] = topology[a.type][a.id] || {};
     topology[a.type][a.id].associates = topology[a.type][a.id].associates || {};
-    topology[a.type][a.id].associates[b.type] =
-      topology[a.type][a.id].associates[b.type] || [];
+    topology[a.type][a.id].associates[b.type] = topology[a.type][a.id].associates[b.type] || [];
     if (!topology[a.type][a.id].associates[b.type].includes(b.id)) {
       topology[a.type][a.id].associates[b.type].push(b.id);
     }
@@ -59,10 +53,7 @@ export const processInventory = data => {
     const object = addObjectToIndex(id, type, name);
     // We can have bad data where the type has a value, but the ID does not.
     // When there is any bad data, make the root node the relative
-    const relative =
-      relativeId && relativeType
-        ? addObjectToIndex(relativeId, relativeType)
-        : { id: ROOT, type: ROOT };
+    const relative = relativeId && relativeType ? addObjectToIndex(relativeId, relativeType) : { id: ROOT, type: ROOT };
 
     switch (relation) {
       case PARENT_RELATIONSHIP:
@@ -98,10 +89,7 @@ export const processInventory = data => {
 };
 
 export const fetchInventory = () => async dispatch => {
-  const { dispatchStart, dispatchSuccess, dispatchError } = actionsFor(
-    FETCH_INVENTORY,
-    dispatch
-  );
+  const { dispatchStart, dispatchSuccess, dispatchError } = actionsFor(FETCH_INVENTORY, dispatch);
   dispatchStart();
 
   try {

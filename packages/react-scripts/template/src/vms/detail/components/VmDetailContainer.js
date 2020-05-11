@@ -1,5 +1,3 @@
-// (C) Copyright 2018 Hewlett Packard Enterprise Development LP
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import VmHeadlineContainer from './headline/VmHeadlineContainer';
@@ -10,7 +8,7 @@ const VmDetailContainer = props => (
   </div>
 );
 
-VmDetailContainer.propsTypes = {
+VmDetailContainer.propTypes = {
   // Injected by InfrastructurePages
   scope: PropTypes.shape({
     type: PropTypes.string.isRequired,

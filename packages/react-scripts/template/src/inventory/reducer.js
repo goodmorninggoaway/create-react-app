@@ -1,10 +1,7 @@
-import {
-  createReducersForAction,
-  createSelector,
-} from '@infosight/elmer/dist/utils/redux';
+import { createReducersForAction, createSelector } from '@infosight/elmer/dist/utils/redux';
 import { FETCH_INVENTORY, RESET } from './constants';
 import { USER_CONTEXT_CHANGED } from '../user/constants';
-import getStore from '../utils/getStore';
+import store from '../bootstrapper/store';
 
 const initialState = {
   objects: { flat: null, index: null, indexedDescendants: null },
@@ -28,14 +25,12 @@ export const inventorySelector = createSelector(
   'objects'
 );
 
-export const flatSelector = state =>
-  baseSelector(state).objects ? baseSelector(state).objects.flat : [];
+export const flatSelector = state => (baseSelector(state).objects ? baseSelector(state).objects.flat : []);
 export const indexedSelector = state => baseSelector(state).objects.index;
-export const descendantsSelector = state =>
-  baseSelector(state).objects.topology;
+export const descendantsSelector = state => baseSelector(state).objects.topology;
 
 export const findObject = (type, id) => {
-  const { objects } = inventorySelector(getStore().getState());
+  const { objects } = inventorySelector(store.getState());
   if (!objects || !objects.index) {
     return undefined;
   }
@@ -46,7 +41,7 @@ export const findObject = (type, id) => {
 };
 
 export const getObjectTopology = (type, id) => {
-  const { objects } = inventorySelector(getStore().getState());
+  const { objects } = inventorySelector(store.getState());
   if (!objects || !objects.topology) {
     return undefined;
   }
