@@ -224,6 +224,7 @@ npm install -g create-react-app@1.2.1
     If an error occurs while `create-react-app` is running, it will now clean up and not leave a broken project to reduce confusion.
 
   - [#1193](https://github.com/facebook/create-react-app/pull/1193) Suggest upgrading to NPM >= 3 for faster install times. ([@mobinni](https://github.com/mobinni))
+    <<<<<<< HEAD
 
   - [#1603](https://github.com/facebook/create-react-app/pull/1603) Allow app creation in a WebStorm project. ([@driquelme](https://github.com/driquelme))
 
@@ -237,7 +238,23 @@ npm install -g create-react-app@1.2.1
 
   - [#1567](https://github.com/facebook/create-react-app/pull/1567) Remove .bin files after eject. ([@tuchk4](https://github.com/tuchk4))
 
-  - [#1560](https://github.com/facebook/create-react-app/pull/1560) Bump `recursive-readdir`. ([@wtgtybhertgeghgtwtg](https://github.com/wtgtybhertgeghgtwtg))
+=======
+
+- [#1603](https://github.com/facebook/create-react-app/pull/1603) Allow app creation in a WebStorm project. ([@driquelme](https://github.com/driquelme))
+
+- [#1570](https://github.com/facebook/create-react-app/pull/1570) Allow git urls in `--scripts-version`. ([@tomconroy](https://github.com/tomconroy))
+
+- `react-scripts`
+
+  - [#1578](https://github.com/facebook/create-react-app/pull/1578) Enable lint caching in development. ([@viankakrisna](https://github.com/viankakrisna))
+
+  - [#1478](https://github.com/facebook/create-react-app/pull/1478) Update the build script message to show the correct port. ([@chyipin](https://github.com/chyipin))
+
+  - [#1567](https://github.com/facebook/create-react-app/pull/1567) Remove .bin files after eject. ([@tuchk4](https://github.com/tuchk4))
+
+> > > > > > > master
+
+- [#1560](https://github.com/facebook/create-react-app/pull/1560) Bump `recursive-readdir`. ([@wtgtybhertgeghgtwtg](https://github.com/wtgtybhertgeghgtwtg))
 
 #### :bug: Bug Fix
 
@@ -417,6 +434,7 @@ Thanks to [@Timer](https://github.com/timer) for cutting this release.
 #### :nail_care: Enhancement
 
 - `react-scripts`
+  <<<<<<< HEAD
 
   - [#1496](https://github.com/facebook/create-react-app/pull/1496) Make build exit with error code when interrupted. ([@brandones](https://github.com/brandones))
   - [#1352](https://github.com/facebook/create-react-app/pull/1352) More descriptive error message for `env.CI = true` warnings causing failures. ([@jayphelps](https://github.com/jayphelps))
@@ -426,6 +444,19 @@ Thanks to [@Timer](https://github.com/timer) for cutting this release.
   - [#1507](https://github.com/facebook/create-react-app/pull/1507) fix: add yarn gitignores. ([@adjohnson916](https://github.com/adjohnson916))
   - [#1510](https://github.com/facebook/create-react-app/pull/1510) Add missing `'\n'` to the end of `package.json` file. ([@pd4d10](https://github.com/pd4d10))
   - [#1324](https://github.com/facebook/create-react-app/pull/1324) Use npm script hooks to avoid `&&` in deploy script. ([@zpao](https://github.com/zpao))
+
+=======
+
+- [#1496](https://github.com/facebook/create-react-app/pull/1496) Make build exit with error code when interrupted. ([@brandones](https://github.com/brandones))
+- [#1352](https://github.com/facebook/create-react-app/pull/1352) More descriptive error message for `env.CI = true` warnings causing failures. ([@jayphelps](https://github.com/jayphelps))
+- [#1264](https://github.com/facebook/create-react-app/pull/1264) Remove interactive shell check when opening browser on start. ([@CaryLandholt](https://github.com/CaryLandholt))
+- [#1311](https://github.com/facebook/create-react-app/pull/1311) Updated `babel-jest` and `jest` packages to 18.0.0. ([@lopezator](https://github.com/lopezator))
+- [#1432](https://github.com/facebook/create-react-app/pull/1432) Bump Jest version. ([@gaearon](https://github.com/gaearon))
+- [#1507](https://github.com/facebook/create-react-app/pull/1507) fix: add yarn gitignores. ([@adjohnson916](https://github.com/adjohnson916))
+- [#1510](https://github.com/facebook/create-react-app/pull/1510) Add missing `'\n'` to the end of `package.json` file. ([@pd4d10](https://github.com/pd4d10))
+- [#1324](https://github.com/facebook/create-react-app/pull/1324) Use npm script hooks to avoid `&&` in deploy script. ([@zpao](https://github.com/zpao))
+
+> > > > > > > master
 
 - `create-react-app`
 
@@ -616,12 +647,21 @@ npm install -g create-react-app@1.0.3
 #### :memo: Documentation
 
 - `react-dev-utils`
+  <<<<<<< HEAD
 
   - [#1232](https://github.com/facebook/create-react-app/pull/1232) [documentation] fix html-dev-plugin link in react-dev-utils doc. ([@shogunsea](https://github.com/shogunsea))
 
 - `react-scripts`
 
-  - [#1220](https://github.com/facebook/create-react-app/pull/1220) Adding troubleshooting information about Subresource Integrity digests.. ([@dfbaskin](https://github.com/dfbaskin))
+=======
+
+- [#1232](https://github.com/facebook/create-react-app/pull/1232) [documentation] fix html-dev-plugin link in react-dev-utils doc. ([@shogunsea](https://github.com/shogunsea))
+
+- `react-scripts`
+
+> > > > > > > master
+
+- [#1220](https://github.com/facebook/create-react-app/pull/1220) Adding troubleshooting information about Subresource Integrity digests.. ([@dfbaskin](https://github.com/dfbaskin))
 
 #### :house: Internal
 
@@ -724,13 +764,18 @@ npm install -g create-react-app@1.0.1
 
     Historically we have allowed specifying `NODE_PATH` environment variable as a way to allow “absolute imports”. For example, running `NODE_PATH=src npm start` in Bash or `set NODE_PATH=src&&npm start` in Windows Cmd would let you import anything inside `src` without specifying a relative path. However, we found a few nasty edge cases when Node.js core modules end up being in `NODE_PATH` and erroneously become bundled. As a result the build would crash on some systems when some libraries are imported. To fix this, we now only honor relative paths from `NODE_PATH` in Create React App. This means the existing use case for absolute imports is still supported (`src` in the example above is relative), but absolute paths in `NODE_PATH` (such as paths to Node.js core modules) will be ignored.
 
-  - [#1188](https://github.com/facebook/create-react-app/pull/1188) Update Webpack to fix source map issues. ([@gaearon](https://github.com/gaearon))
+<<<<<<< HEAD
 
-    Since 0.8.0, we show source maps in development instead of the compiled code. However, it has come to our attention that Webpack's source map implementation had issues interpreting Babel output, and caused source maps to be wrong and breakpoints to be unusable in some cases. Webpack has released a fix for this, and we have updated the minimal version of Webpack that we are using.
+- # [#1188](https://github.com/facebook/create-react-app/pull/1188) Update Webpack to fix source map issues. ([@gaearon](https://github.com/gaearon))
+- [#1188](https://github.com/facebook/create-react-app/pull/1188) Update webpack to fix source map issues. ([@gaearon](https://github.com/gaearon))
 
-  - [#1180](https://github.com/facebook/create-react-app/pull/1180) Use `file-loader` for svgs. ([@bogdansoare](https://github.com/bogdansoare))
+  > > > > > > > master
 
-    Since 0.8.0, we are treating all imports with non-JS/CSS extensions the same way. Importing them gives you a string with their URL, and if their content is small enough (less than 10K), the URL is in fact an inlined [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). However, this doesn't work well with SVGs in case you use them for a sprite system since fragments don't work in data URIs, and it's wasteful to inline the same sprite SVG many times. To fix this, we have added an exception so that SVG files never get inlined.
+      Since 0.8.0, we show source maps in development instead of the compiled code. However, it has come to our attention that webpack's source map implementation had issues interpreting Babel output, and caused source maps to be wrong and breakpoints to be unusable in some cases. webpack has released a fix for this, and we have updated the minimal version of webpack that we are using.
+
+- [#1180](https://github.com/facebook/create-react-app/pull/1180) Use `file-loader` for svgs. ([@bogdansoare](https://github.com/bogdansoare))
+
+  Since 0.8.0, we are treating all imports with non-JS/CSS extensions the same way. Importing them gives you a string with their URL, and if their content is small enough (less than 10K), the URL is in fact an inlined [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). However, this doesn't work well with SVGs in case you use them for a sprite system since fragments don't work in data URIs, and it's wasteful to inline the same sprite SVG many times. To fix this, we have added an exception so that SVG files never get inlined.
 
 - `react-dev-utils`
 
@@ -826,22 +871,29 @@ Thanks to [@fson](https://github.com/fson) for cutting this release.
     Linter warnings and errors are now checked during a continuous integration build (set by the `CI` environment variable) and the build will fail if any issues are found. See [Continuous Integration](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#continuous-integration) for more information.
 
   - [#1090](https://github.com/facebook/create-react-app/pull/1090) Enable proxying of WebSockets. ([@dceddia](https://github.com/dceddia))
+    <<<<<<< HEAD
 
 - `create-react-app`, `react-scripts`
 
-  - [#898](https://github.com/facebook/create-react-app/pull/898) Support Yarn. ([@fson](https://github.com/fson))
+=======
 
-    Yarn is a new fast, reliable and secure alternative to the `npm` client. If you have Yarn installed, `create-react-app` will use it to install packages when you create an app. It also creates a `yarn.lock` file that should be checked into source control (e.g. git). This ensures the same versions of packages will be installed each time `yarn install` is run, on any machine.
+- `create-react-app`, `react-scripts`
 
-    `react-scripts` now also displays instructions using `yarn` commands for projects using Yarn (projects having a `yarn.lock` file).
+> > > > > > > master
 
-    To create a project using Yarn, simply install `yarn` and use `create-react-app` like before:
+- [#898](https://github.com/facebook/create-react-app/pull/898) Support Yarn. ([@fson](https://github.com/fson))
 
-    ```
-    npm install -g yarn create-react-app@latest
+  Yarn is a new fast, reliable and secure alternative to the `npm` client. If you have Yarn installed, `create-react-app` will use it to install packages when you create an app. It also creates a `yarn.lock` file that should be checked into source control (e.g. git). This ensures the same versions of packages will be installed each time `yarn install` is run, on any machine.
 
-    create-react-app my-app  # Packages are now installed with Yarn.
-    ```
+  `react-scripts` now also displays instructions using `yarn` commands for projects using Yarn (projects having a `yarn.lock` file).
+
+  To create a project using Yarn, simply install `yarn` and use `create-react-app` like before:
+
+  ```
+  npm install -g yarn create-react-app@latest
+
+  create-react-app my-app  # Packages are now installed with Yarn.
+  ```
 
 #### :boom: Breaking Change
 
@@ -1005,7 +1057,11 @@ Thanks to [@fson](https://github.com/fson) for cutting this release.
 
 ### ESLint Config (`eslint-config-react-app`)
 
-- Adds `import/no-webpack-loader-syntax` rule that forbids using custom Webpack specific syntax to specify Webpack loaders in import statements. ([@fson](https://github.com/fson) in [#803](https://github.com/facebook/create-react-app/pull/803))
+<<<<<<< HEAD
+
+- # Adds `import/no-webpack-loader-syntax` rule that forbids using custom Webpack specific syntax to specify Webpack loaders in import statements. ([@fson](https://github.com/fson) in [#803](https://github.com/facebook/create-react-app/pull/803))
+- Adds `import/no-webpack-loader-syntax` rule that forbids using custom webpack specific syntax to specify webpack loaders in import statements. ([@fson](https://github.com/fson) in [#803](https://github.com/facebook/create-react-app/pull/803))
+  > > > > > > > master
 - `react/react-in-jsx-scope` rule ("React must be in scope") is now an error. ([@gaearon](https://github.com/gaearon) in [#822](https://github.com/facebook/create-react-app/pull/822))
 - `no-unused-expressions` rule now allows the use of short circuit and ternary expressions. ([@cannona](https://github.com/cannona) in [#724](https://github.com/facebook/create-react-app/pull/724))
 
@@ -1018,7 +1074,10 @@ Thanks to [@fson](https://github.com/fson) for cutting this release.
 ### Utilities (`react-dev-utils`)
 
 - The error overlay is now disposed after fixing linting errors. ([@jarlef](https://github.com/jarlef) in [#856](https://github.com/facebook/create-react-app/pull/856))
-- Adds support for Webpack 2 to `webpackHotDevClient`. ([@michalkvasnicak](https://github.com/michalkvasnicak) in [#840](https://github.com/facebook/create-react-app/pull/840))
+  <<<<<<< HEAD
+- # Adds support for Webpack 2 to `webpackHotDevClient`. ([@michalkvasnicak](https://github.com/michalkvasnicak) in [#840](https://github.com/facebook/create-react-app/pull/840))
+- Adds support for webpack 2 to `webpackHotDevClient`. ([@michalkvasnicak](https://github.com/michalkvasnicak) in [#840](https://github.com/facebook/create-react-app/pull/840))
+  > > > > > > > master
 
 ### Global CLI (`create-react-app`)
 
@@ -1044,6 +1103,7 @@ npm install --save-dev --save-exact react-scripts@0.7.0
 #### Updating Snapshots
 
 Jest 16 includes [improvements to snapshot testing and changes to the snapshot format](https://facebook.github.io/jest/blog/2016/10/03/jest-16.html#snapshot-updates). If your project uses snapshot testing, you'll need to update the snapshot files. To update the snapshots, run:
+
 ```sh
 npm test -- -u
 ```
@@ -1156,13 +1216,13 @@ You can no longer reference any files from `./src` in `index.html`. Instead, `pu
 For example, instead of:
 
 ```html
-<link rel="shortcut icon" href="./src/favicon.ico">
+<link rel="shortcut icon" href="./src/favicon.ico" />
 ```
 
 You would need to move both `index.html` and `src/favicon.ico` into the `public` folder, and change `<link>` to look like this:
 
 ```html
-<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
 ```
 
 This ensures it become a part of the build output, and resolves correctly both with client-side routing and non-root `homepage` in `package.json`. Read more about [using the `public` folder](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-the-public-folder) and [why these changes were made](https://github.com/facebook/create-react-app/pull/703).
@@ -1261,7 +1321,7 @@ Paths like `/src/somefile.png` used to be served in development, but only by acc
 
 If you need a static file to be part for the build, [import it from JavaScript and you will get its filename](https://github.com/facebook/create-react-app/blob/master/template/README.md#adding-images-and-fonts). This ensures it gets included into the production build as well, and its filename contains the content hash.
 
-If you used static files with `<link href>`, [read this new guide](https://github.com/facebook/create-react-app/blob/master/template/README.md#referring-to-static-assets-from-link-href) on how to make sure these files get included into the builds. For example, you can replace `<link href="/src/favicons/favicon-32.png">` with `<link href="./src/favicons/favicon-32.png">`, and then Webpack will recognize it and include it into the build.
+If you used static files with `<link href>`, [read this new guide](https://github.com/facebook/create-react-app/blob/master/template/README.md#referring-to-static-assets-from-link-href) on how to make sure these files get included into the builds. For example, you can replace `<link href="/src/favicons/favicon-32.png">` with `<link href="./src/favicons/favicon-32.png">`, and then webpack will recognize it and include it into the build.
 
 If you referenced some other files from `index.html`, please file an issue to discuss your use case. In the meantime, you can serve them from a separate static server until your use case is supported.
 
@@ -1315,7 +1375,7 @@ Now `favicon.ico` is not treated specially anymore.<br>
 If you use it, move it to `src` and add the following line to `<head>` in your HTML:
 
 ```html
-<link rel="shortcut icon" href="./src/favicon.ico">
+<link rel="shortcut icon" href="./src/favicon.ico" />
 ```
 
 #### New Feature
@@ -1375,7 +1435,7 @@ Newly created projects will use `0.2.2` automatically. You **don’t** need to u
 ### Build Dependency (`react-scripts`)
 
 - Fixes an issue with `npm start` taking a very long time on OS X with Firewall enabled ([@gaearon](https://github.com/gaearon) in [#319](https://github.com/facebook/create-react-app/pull/319))
-- Fixes an issue with Webpack eating a lot of CPU in some cases ([@dceddia](https://github.com/dceddia) in [#294](https://github.com/facebook/create-react-app/pull/294))
+- Fixes an issue with webpack eating a lot of CPU in some cases ([@dceddia](https://github.com/dceddia) in [#294](https://github.com/facebook/create-react-app/pull/294))
 - We now warn if you import a file with mismatched casing because this breaks the watcher ([@alexzherdev](https://github.com/alexzherdev) in [#266](https://github.com/facebook/create-react-app/pull/266))
 - CSS files specifying `?v=` after asset filenames, such as Font Awesome, now works correctly ([@alexzherdev](https://github.com/alexzherdev) in [#298](https://github.com/facebook/create-react-app/pull/298))
 - Issues with `npm link`ing `react-scripts` have been fixed ([@dallonf](https://github.com/dallonf) in [#277](https://github.com/facebook/create-react-app/pull/277))
