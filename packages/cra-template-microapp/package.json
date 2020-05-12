@@ -1,23 +1,23 @@
 {
   "name": "@infosight/cra-template-microapp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "keywords": [
     "react",
-    "create-react-app",
+    "create-react-infosight-microapp",
     "template"
   ],
   "description": "The base template for Create React App.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
-    "directory": "packages/cra-template"
+    "url": "https://github.com/goodmorninggoaway/create-react-infosight-microapp.git",
+    "directory": "packages/cra-template-microapp"
   },
   "license": "MIT",
   "engines": {
     "node": ">=10"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/goodmorninggoaway/create-react-infosight-microapp/issues"
   },
   "files": [
     "template",
