@@ -1,0 +1,104 @@
+final emailSettings = {
+    return [
+        recipientProviders: [
+            [$class: 'CulpritsRecipientProvider']
+        ],
+        to: 'infosight-nimble@hpe.flowdock.com',
+        subject: "Jenkins Build ${(currentBuild.result?:'SUCCESS').toUpperCase()}: ${env.JOB_NAME} #[${env.BUILD_NUMBER}]",
+        mimeType: 'text/html',
+        body: """
+            <a href="${env.BUILD_URL}">${env.BUILD_URL}</a>
+        """
+    ]
+}
+
+pipeline {
+    agent {
+        label env.HPE_INFOSIGHT_UI_BUILD_AGENT
+    }
+
+    environment {
+        MICROAPP_ID = 'iam'
+    }
+
+    stages {
+        stage('Env Setup') {
+            steps {
+                dir('devops-portal') {
+                    git branch: 'master', credentialsId: 'bf01b347-fb70-4206-a165-82c2533072a1', url: 'https://github.hpe.com/infosight/devops-portal.git'
+                }
+
+                withCredentials([usernamePassword(credentialsId: 'bbob-hpeartifactory', usernameVariable: 'HPE_ARTIFACTORY_USER', passwordVariable: 'HPE_ARTIFACTORY_API_KEY')]) {
+                        sh '''
+                        devops-portal/setup-build-environment.py \
+                            --setup_type='npmrc' \
+                            --user=$HPE_ARTIFACTORY_USER \
+                            --api_key=$HPE_ARTIFACTORY_API_KEY \
+                            --artifactory_url=$HPE_ARTIFACTORY_URL \
+                            --npm_registry_url=$HPE_ARTIFACTORY_NPM_REGISTRY_URL \
+                            --npm_auth_url=$HPE_ARTIFACTORY_NPM_AUTH_URL
+                        '''
+                }
+            }
+        }
+        stage('Install') {
+            steps {
+                sh '''
+                npm -v
+                node -v
+                # Remove -d if you don't want debug information in your build
+                npm -d ci
+                '''
+            }
+        }
+        stage('Test') {
+            // Run CI scripts only on PRs and master. `when changeRequest()` doesn't work on these builds, probably because the plugin in missing
+            when {
+                not {
+                    anyOf {
+                        branch 'release'
+                        branch 'prod'
+                    }
+                }
+            }
+            steps {
+                sh 'CI=true npm test'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('Release') {
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'release'
+                    branch 'prod'
+                    branch 'sv1'
+                    branch '3parunification'
+                }
+            }
+            steps {
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'd7ea8df7-b5b4-4968-a129-5784c1373bab',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]) {
+                    dir('devops-portal') {
+                        sh './microapp-deploy.py stage'
+                        sh './microapp-deploy.py release latest'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
