@@ -76,8 +76,6 @@ pipeline {
                     branch 'master'
                     branch 'release'
                     branch 'prod'
-                    branch 'sv1'
-                    branch '3parunification'
                 }
             }
             steps {
