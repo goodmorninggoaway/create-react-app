@@ -263,6 +263,24 @@ module.exports = function(
     }
   }
 
+  // Modifies Jenkinsfile based on micropp name.
+  const jenkinsfileExists = fs.existsSync(path.join(appPath, 'Jenkinsfile'));
+  if (jenkinsfileExists) {
+    try {
+      const microappIdName = appName.split("-")[1];
+      const jenkinsfile = fs.readFileSync(path.join(appPath, 'Jenkinsfile'), 'utf8');
+      fs.writeFileSync(
+          path.join(appPath, 'Jenkinsfile'),
+          jenkinsfile.replace("MICROAPP_ID_NAME", microappIdName),
+          'utf8'
+      );
+    } catch (err) {
+      console.error(
+          `Unable to set MICROAPP_ID value correctly in ${chalk.green(path.join(appPath, 'Jenkinsfile'))}`
+      );
+    }
+  }
+
   const gitignoreExists = fs.existsSync(path.join(appPath, '.gitignore'));
   if (gitignoreExists) {
     // Append if there's already a `.gitignore` file there
