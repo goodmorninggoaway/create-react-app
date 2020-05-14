@@ -18,7 +18,7 @@ pipeline {
     }
 
     environment {
-        MICROAPP_ID = 'iam'
+        MICROAPP_ID = 'MICROAPP_ID_NAME'
     }
 
     stages {
