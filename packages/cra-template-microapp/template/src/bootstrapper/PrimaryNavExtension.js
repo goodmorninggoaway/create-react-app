@@ -30,6 +30,7 @@ class PrimaryNavExtension extends Component {
 
   getDashboard() {
     const { authz, match } = this.props;
+    // Typically, here you would also remove access if the inventory was empty for the current organization
     const options = authz.filter([
       {
         id: ID,
@@ -55,6 +56,7 @@ class PrimaryNavExtension extends Component {
 
   getInfrastructure() {
     const { authz, match } = this.props;
+    // Typically, here you would also remove access if the inventory was empty for the current organization
     const options = authz.filter([
       {
         id: 'storage/sample',

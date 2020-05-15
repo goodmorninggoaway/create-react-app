@@ -5,6 +5,7 @@ import ShellStateCache from './ShellStateCache';
 import PrimaryNavExtension from './PrimaryNavExtension';
 import RouterExtension from './RouterExtension';
 import HomeExtension from './HomeExtension';
+import SearchExtension from './SearchExtension';
 
 const Microapp = () => (
   <Provider store={store}>
@@ -12,7 +13,7 @@ const Microapp = () => (
       <PrimaryNavExtension />
       <RouterExtension />
       <HomeExtension />
-      {/* TODO: SearchExtension */}
+      <SearchExtension />
     </ShellStateCache>
   </Provider>
 );
