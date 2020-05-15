@@ -11,6 +11,7 @@ class BackendSearchSubject {
 
     this.id = `${productInterface.id.toLowerCase()}-infrastructure-objects`;
     this.name = productInterface.attributes.name;
+    // Search results will be broken down by object type, so this mapping is required for the search extension point to figure that out
     this.topics = Object.values(OBJECTS).map(objectType => ({
       id: objectType,
       singularName: productInterface.getSingularTitle(objectType),
@@ -81,6 +82,7 @@ class BackendSearchSubject {
    * @public
    */
   search({ query, submit }) {
+    // the submit param is an object with three handler functions: hits, error, and noOp
     this.handlers = submit;
     // You should replace this with an actual call to an API such as:
     // const response = await fetch(`/api/sample/search?query=${query}`);
