@@ -1,6 +1,6 @@
 {
   "name": "@infosight/microapp-scripts",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "Configuration and scripts for Create React InfoSight Microapp.",
   "repository": "goodmorninggoaway/create-react-infosight-microapp",
   "license": "MIT",
@@ -84,8 +84,8 @@
     "worker-loader": "1.1.1"
   },
   "devDependencies": {
-    "@infosight/shell-api": "^2.2.2",
     "@infosight/elmer": "^4.0.2",
+    "@infosight/shell-api": "^2.2.2",
     "classnames": "^2.2.5",
     "history": "^4.7.2",
     "moment": "^2.22.2",
