@@ -19,15 +19,7 @@ Do not run `npm install` or `yarn`. Always use lerna or expect problems.
 
 # Publishing
 
-Since this repo is on public GitHub, you need to publish packages manually.
-
-1. Bump the version in the packages `package.json` file. Do not use `lerna version`
-1. Very likely, if you're editing this repo, you have push privileges on our private npm registry. If not, a maintainer should probably handle the publishing.
-1. Publish using `npm publish`.
-   - If you need to publish a pre-release version, be sure to use appropriate versioning and set a tag. Otherwise your beta becomes somebody's prod version
-     if they aren't commiting the `package-lock.json` file in thier microapp.
-   - `npm publish --tag prerelease`
-   - If you forget, use [`npm dist-tag`](https://docs.npmjs.com/cli/dist-tag) to move the `latest` tag and set `prerelease`
+To publish, mostly follow the [Cutting A Release](./CONTRIBUTING.md#cutting-a-release) guidelines skipping only steps about github labels or updating the changelog.
 
 ## Everything below this point is from create-react-app
 
