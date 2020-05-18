@@ -88,6 +88,50 @@ export const processInventory = data => {
   return { index, topology };
 };
 
+// Used for the mock search
+export const mockInventory = [
+  {
+    id: '10000001',
+    name: 'Sample Host 1',
+    relation: 1,
+    relativeId: null,
+    relativeType: null,
+    type: 'SAMPLE.HOST',
+  },
+  {
+    id: '10000002',
+    name: 'Sample Host 2',
+    relation: 1,
+    relativeId: null,
+    relativeType: null,
+    type: 'SAMPLE.HOST',
+  },
+  {
+    id: '10000003',
+    name: 'Sample VM 1',
+    relation: 1,
+    relativeId: '10000001',
+    relativeType: 'SAMPLE.HOST',
+    type: 'SAMPLE.VM',
+  },
+  {
+    id: '10000004',
+    name: 'Sample VM 2',
+    relation: 1,
+    relativeId: '10000001',
+    relativeType: 'SAMPLE.HOST',
+    type: 'SAMPLE.VM',
+  },
+  {
+    id: '10000005',
+    name: 'Sample VM 3',
+    relation: 1,
+    relativeId: '10000002',
+    relativeType: 'SAMPLE.HOST',
+    type: 'SAMPLE.VM',
+  },
+];
+
 export const fetchInventory = () => async dispatch => {
   const { dispatchStart, dispatchSuccess, dispatchError } = actionsFor(FETCH_INVENTORY, dispatch);
   dispatchStart();
@@ -96,48 +140,7 @@ export const fetchInventory = () => async dispatch => {
     // TODO: replace this with a real inventory call
     // const response = await fetch('/api/sample/inventory');
     const response = {
-      data: [
-        {
-          id: '10000001',
-          name: 'Sample Host 1',
-          relation: 1,
-          relativeId: null,
-          relativeType: null,
-          type: 'SAMPLE.HOST',
-        },
-        {
-          id: '10000002',
-          name: 'Sample Host 2',
-          relation: 1,
-          relativeId: null,
-          relativeType: null,
-          type: 'SAMPLE.HOST',
-        },
-        {
-          id: '10000003',
-          name: 'Sample VM 1',
-          relation: 1,
-          relativeId: '10000001',
-          relativeType: 'SAMPLE.HOST',
-          type: 'SAMPLE.VM',
-        },
-        {
-          id: '10000004',
-          name: 'Sample VM 2',
-          relation: 1,
-          relativeId: '10000001',
-          relativeType: 'SAMPLE.HOST',
-          type: 'SAMPLE.VM',
-        },
-        {
-          id: '10000005',
-          name: 'Sample VM 3',
-          relation: 1,
-          relativeId: '10000002',
-          relativeType: 'SAMPLE.HOST',
-          type: 'SAMPLE.VM',
-        },
-      ],
+      data: mockInventory,
     };
 
     dispatchSuccess(processInventory(response.data));
