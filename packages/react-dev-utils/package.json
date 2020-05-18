@@ -2,6 +2,7 @@
   "name": "react-dev-utils",
   "version": "10.2.1",
   "description": "webpack utilities used by Create React App",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/facebook/create-react-app.git",

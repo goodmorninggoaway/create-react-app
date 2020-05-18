@@ -8,6 +8,7 @@
     "typescript"
   ],
   "description": "The base TypeScript template for Create React App.",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/facebook/create-react-app.git",

@@ -2,6 +2,7 @@
   "name": "babel-plugin-named-asset-import",
   "version": "0.3.6",
   "description": "Babel plugin for named asset imports in Create React App",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/facebook/create-react-app.git",

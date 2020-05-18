@@ -2,6 +2,7 @@
   "name": "babel-preset-react-app",
   "version": "9.1.2",
   "description": "Babel preset used by Create React App",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/facebook/create-react-app.git",
