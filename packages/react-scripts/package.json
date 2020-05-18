@@ -27,6 +27,7 @@
     "@babel/core": "7.9.6",
     "@infosight/build-info-webpack-plugin": "^1.0.1",
     "@pmmmwh/react-refresh-webpack-plugin": "0.3.0-beta.1",
+    "@testing-library/react": "10.0.4",
     "@svgr/webpack": "4.3.3",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
