@@ -2,6 +2,7 @@
   "name": "eslint-config-react-app",
   "version": "5.2.1",
   "description": "ESLint configuration used by Create React App",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/facebook/create-react-app.git",

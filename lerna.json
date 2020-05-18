@@ -15,5 +15,20 @@
       "tag: underlying tools": ":hammer: Underlying Tools"
     },
     "cacheDir": ".changelog"
+  },
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "packages/babel-plugin-named-asset-import/**/*",
+        "packages/babel-preset-react-app/**/*",
+        "packages/confusing-browser-globals/**/*",
+        "packages/cra-template/**/*",
+        "packages/cra-template-typescript/**/*",
+        "packages/eslint-config-react-app/**/*",
+        "packages/react-app-polyfill/**/*",
+        "packages/react-dev-utils/**/*",
+        "packages/react-error-overlay/**/*"
+      ]
+    }
   }
 }
