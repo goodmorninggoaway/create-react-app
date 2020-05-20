@@ -1,38 +1,21 @@
-import { Component } from 'react';
-import autobind from 'react-autobind';
+import { useEffect } from 'react';
 import { addSubject } from '@infosight/shell-api/lib/Search';
 import { onShellStateUpdate } from '../user/utils';
 import subject from '../search/subject';
 
 const ID = process.env.REACT_APP_MICROAPP_ID;
 
-class SearchExtension extends Component {
-  // eslint-disable-line react/no-multi-comp
-  constructor(props) {
-    super(props);
-    autobind(this);
-  }
+const SearchExtension = () => {
+  useEffect(() => {
+    const handleUpdate = () => {
+      // Typically, here you would also remove access if the inventory was empty for the current organization
+      addSubject({ id: ID, provider: subject });
+    };
+    handleUpdate();
+    return onShellStateUpdate(handleUpdate);
+  }, []);
 
-  componentDidMount() {
-    this.handleUpdate();
-    this.unsubscribe = onShellStateUpdate(this.handleUpdate);
-  }
-
-  componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-
-  handleUpdate() {
-    // eslint-disable-line class-methods-use-this
-    // Typically, here you would also remove access if the inventory was empty for the current organization
-    addSubject({ id: ID, provider: subject });
-  }
-
-  render() {
-    return null;
-  }
-}
+  return null;
+};
 
 export default SearchExtension;

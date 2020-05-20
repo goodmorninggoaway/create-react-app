@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Async } from '@infosight/elmer/dist/components/Async';
@@ -6,21 +6,19 @@ import HostHeadline from './HostHeadline';
 import { fetchHost } from '../../actionCreators';
 import { hostSelector } from '../../reducer';
 
-class HostHeadlineContainer extends Component {
-  componentDidMount() {
+const HostHeadlineContainer = props => {
+  const { fetchHost, hostId, loadingHost } = props;
+  useEffect(() => {
     // Gets host details by id
-    this.props.fetchHost(this.props.hostId);
-  }
+    fetchHost(hostId);
+  }, [fetchHost, hostId]);
 
-  render() {
-    const { loadingHost } = this.props;
-    return (
-      <Async loading={loadingHost}>
-        <HostHeadline {...this.props} />
-      </Async>
-    );
-  }
-}
+  return (
+    <Async loading={loadingHost}>
+      <HostHeadline {...props} />
+    </Async>
+  );
+};
 
 HostHeadlineContainer.propTypes = {
   hostId: PropTypes.string.isRequired,

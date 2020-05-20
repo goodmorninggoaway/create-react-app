@@ -1,9 +1,13 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import autobind from 'react-autobind';
 import { onUserContextChange } from '@infosight/shell-api/lib/UserProfile';
-import { loadTenant, loadUser, loadExperimental, changeUserContext } from '../user/actionCreators';
+import {
+  changeUserContext as changeUserContextActionCreator,
+  loadTenant as loadTenantActionCreator,
+  loadUser as loadUserActionCreator,
+  loadExperimental as loadExperimentalActionCreator,
+} from '../user/actionCreators';
 import { triggerShellStateUpdated } from '../user/utils';
 
 /**
@@ -15,48 +19,36 @@ import { triggerShellStateUpdated } from '../user/utils';
  * You should use generally use this technique only for state that is static or rarely changes.
  * For dynamic state, strongly prefer making the consuming code async and fetching it directly from the Shell.
  */
-class ShellStateCache extends Component {
-  constructor(props) {
-    super(props);
-    autobind(this);
+const ShellStateCache = ({ changeUserContext, children, loadTenant, loadUser, loadExperimental }) => {
+  const [loaded, setLoaded] = useState(false);
 
-    this.state = { loaded: false };
+  useEffect(() => {
+    const getShellState = () => {
+      Promise.all([loadTenant(), loadUser(), loadExperimental()]).then(() => {
+        setLoaded(true);
+        triggerShellStateUpdated();
+      });
+    };
+
+    const handleUpdate = reason => {
+      // First, trigger all the reducers that need to reset when the tenant changes
+      changeUserContext(reason);
+
+      // Then update cached state.
+      getShellState(reason);
+    };
+
+    getShellState();
+    return onUserContextChange(handleUpdate);
+  }, [changeUserContext, loadTenant, loadUser, loadExperimental]);
+
+  // If the data is not loaded, don't render children. This prevents us from attempting to use some state before it is defined.
+  if (!loaded) {
+    return null;
   }
 
-  async componentDidMount() {
-    this.getShellState();
-    this.unsubscribe = onUserContextChange(this.handleUpdate);
-  }
-
-  componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-
-  getShellState() {
-    Promise.all([this.props.loadTenant(), this.props.loadUser(), this.props.loadExperimental()]).then(() => {
-      this.setState({ loaded: true }, triggerShellStateUpdated);
-    });
-  }
-
-  handleUpdate(reason) {
-    // First, trigger all the reducers that need to reset when the tenant changes
-    this.props.changeUserContext(reason);
-
-    // Then update cached state.
-    this.getShellState(reason);
-  }
-
-  render() {
-    // If the data is not loaded, don't render children. This prevents us from attempting to use some state before it is defined.
-    if (!this.state.loaded) {
-      return null;
-    }
-
-    return this.props.children;
-  }
-}
+  return children;
+};
 
 ShellStateCache.propTypes = {
   children: PropTypes.node.isRequired,
@@ -68,4 +60,11 @@ ShellStateCache.propTypes = {
 
 const mapStateToProps = () => ({});
 
-export default connect(mapStateToProps, { changeUserContext, loadTenant, loadUser, loadExperimental })(ShellStateCache);
+const mapDispatchToProps = {
+  changeUserContext: changeUserContextActionCreator,
+  loadTenant: loadTenantActionCreator,
+  loadUser: loadUserActionCreator,
+  loadExperimental: loadExperimentalActionCreator,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShellStateCache);

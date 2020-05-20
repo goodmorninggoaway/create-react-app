@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import VmList from './VmList';
-import { fetchVms } from '../../actionCreators';
+import { fetchVms as fetchVmsActionCreator } from '../../actionCreators';
 import { vmsSelector } from '../../reducer';
 
-class VmListContainer extends Component {
-  componentDidMount() {
-    const { productInterface, scope } = this.props;
-    this.props.fetchVms({
+const VmListContainer = props => {
+  const { fetchVms, productInterface, scope } = props;
+  useEffect(() => {
+    fetchVms({
       scope: productInterface.convertToGenericQueryScope(scope),
     });
-  }
+  }, [fetchVms, productInterface, scope]);
 
-  render() {
-    return <VmList {...this.props} />;
-  }
-}
+  return <VmList {...props} />;
+};
 
 VmListContainer.propTypes = {
   fetchVms: PropTypes.func.isRequired,
@@ -33,7 +31,7 @@ const mapStateToProps = state => ({
   ...vmsSelector(state),
 });
 
-const mapDispatchToProps = { fetchVms };
+const mapDispatchToProps = { fetchVms: fetchVmsActionCreator };
 
 // Useful for testing this component
 export const Unwrapped = VmListContainer;
