@@ -1,6 +1,6 @@
 {
   "name": "@infosight/microapp-scripts",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "Configuration and scripts for Create React InfoSight Microapp.",
   "repository": "goodmorninggoaway/create-react-infosight-microapp",
   "license": "MIT",
