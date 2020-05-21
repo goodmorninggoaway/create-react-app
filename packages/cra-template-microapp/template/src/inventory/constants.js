@@ -8,4 +8,5 @@ export const RESET = ns('RESET');
 export const OBJECTS = {
   HOST: 'SAMPLE.HOST',
   VM: 'SAMPLE.VM',
+  CLUSTER: 'SAMPLE.CLUSTER',
 };

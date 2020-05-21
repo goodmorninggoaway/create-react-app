@@ -1,0 +1,111 @@
+.xlarge-column {
+  width: 15em;
+}
+
+.large-column {
+  width: 12em;
+}
+
+.ellipse-no-overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+}
+
+.red {
+  color: #D9504F;
+}
+
+.yellow {
+  color: #F1C232;
+}
+
+.green {
+  color: #62A62C;
+}
+
+.overutilized-num {
+  font-size: 24px;
+  font-weight: 600;
+  float: right;
+}
+
+.overutilized {
+  float: right;
+}
+
+.optionTitle {
+  margin-right: 0.6em;
+  margin-left: 1em;
+}
+
+.perspective-selector {
+  margin-right: 16px;
+}
+
+.options {
+  margin-bottom: 1.2rem;
+}
+
+.border-line {
+  border-right: 2px solid #e2e6ea;
+  border-left: 2px solid #e2e6ea;
+  border-bottom: 2px solid #e2e6ea;
+  height: 4px;
+}
+
+.col-center {
+  text-align: center;
+}
+
+tr > span {
+  color: grey;
+}
+
+.sort-label {
+  padding-left: 14px;
+  padding-right: 5px;
+}
+
+div.cluster-card-table > table.no-border > tbody > tr {
+  border-bottom: none;
+  background-color: transparent;
+}
+
+div.cluster-card-table > table.no-border > tbody > tr > td {
+  padding: 2px;
+  max-width: 12em;
+}
+
+div.cluster-card-table > table.no-border > thead > tr > th {
+  padding: 2px;
+}
+
+div.cluster-card-table > table.no-border > thead {
+  border: none;
+}
+
+.cluster-name {
+  font-size: 21px;
+}
+
+.pagination-margin {
+  width: 100%;
+  float: right;
+  margin-right: 1em;
+}
+
+.hostname-align > span {
+  justify-content: center;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.less-padding > :last-child {
+  padding: 2px 15px;
+}
+
+.less-padding > :first-child {
+  padding: 5px 15px;
+}
