@@ -1,6 +1,6 @@
 import { actionsFor } from '@infosight/elmer/dist/utils/redux';
 import { FETCH_CLUSTER } from './constants';
-import { mockClusterData } from '../clusterMockData';
+import mockClusterData from '../clusterMockData';
 // Function for dispatching actions
 export const fetchCluster = clusterName => async dispatch => {
   const { dispatchStart, dispatchSuccess, dispatchError } = actionsFor(FETCH_CLUSTER, dispatch);

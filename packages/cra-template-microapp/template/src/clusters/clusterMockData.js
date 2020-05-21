@@ -1,4 +1,4 @@
-const mockClusterResponse = {
+const mockClusterData = {
   data: [
     {
       name: 'Cluster1',
@@ -9,4 +9,4 @@ const mockClusterResponse = {
   ],
 };
 
-export default mockClusterResponse;
+export default mockClusterData;
