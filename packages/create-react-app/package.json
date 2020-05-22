@@ -1,6 +1,6 @@
 {
   "name": "@infosight/create-microapp",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "keywords": [
     "react"
   ],
@@ -14,23 +14,9 @@
     "url": "https://github.com/goodmorninggoaway/create-react-infosight-microapp/issues"
   },
   "files": [
-    "index.js",
-    "createReactApp.js",
-    "yarn.lock.cached"
+    "index.js"
   ],
   "bin": {
     "create-react-app": "./index.js"
-  },
-  "dependencies": {
-    "chalk": "1.1.3",
-    "commander": "2.18.0",
-    "cross-spawn": "4.0.2",
-    "envinfo": "5.10.0",
-    "fs-extra": "5.0.0",
-    "hyperquest": "2.1.3",
-    "semver": "5.5.1",
-    "tar-pack": "3.4.1",
-    "tmp": "0.0.33",
-    "validate-npm-package-name": "3.0.0"
   }
 }
