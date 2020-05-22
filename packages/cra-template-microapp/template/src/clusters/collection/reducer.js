@@ -1,15 +1,17 @@
 import { createReducersForAction, createSelector, getInitialState } from '@infosight/elmer/dist/utils/redux';
 import { FETCH_CLUSTERS, RESET } from './constants';
 
+const CLUSTERS_KEY = 'clusters';
+
 // Initial state for hosts list
 const initialState = {
-  ...getInitialState('clusters'),
+  ...getInitialState(CLUSTERS_KEY),
   error: {},
 };
 
 const ACTION_HANDLERS = {
   [RESET]: () => initialState,
-  ...createReducersForAction({ type: FETCH_CLUSTERS, stateKey: 'clusters' }),
+  ...createReducersForAction({ type: FETCH_CLUSTERS, stateKey: CLUSTERS_KEY }),
 };
 
 export default function reducer(state = initialState, action) {
@@ -19,4 +21,4 @@ export default function reducer(state = initialState, action) {
 
 const baseSelector = state => state.clusterCollection;
 
-export const clustersSelector = createSelector(baseSelector, 'clusters');
+export const clustersSelector = createSelector(baseSelector, CLUSTERS_KEY);
