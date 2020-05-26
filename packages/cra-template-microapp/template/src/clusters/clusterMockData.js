@@ -18,7 +18,7 @@ export const mockClusterData = {
   ],
 };
 
-export const hostsByCluster = {
+export const mockHostsByCluster = {
   data: [
     {
       accountId: '001S000000m1h8CIAQ',

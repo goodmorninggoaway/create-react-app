@@ -8,7 +8,6 @@ import HostDetailContainer from '../hosts/detail/components/HostDetailContainer'
 import VmListContainer from '../vms/collection/components/list/VmListContainer';
 import VmDetailContainer from '../vms/detail/components/VmDetailContainer';
 import ClusterCardsContainer from '../clusters/collection/components/cards/ClusterCardsContainer';
-import ClusterDetailContainer from '../clusters/detail/components/ClusterDetailContainer';
 
 const { CARD, TABLE } = VIEW_TYPES;
 const { HOST, VM, CLUSTER } = OBJECTS;
@@ -116,10 +115,6 @@ const config = {
           requireScope: false,
         },
       ],
-      detailView: {
-        component: ClusterDetailContainer,
-        invisible: false,
-      },
     },
   ],
   topology: {
