@@ -31,6 +31,7 @@ export function fetchClusterCards() {
       const clustersData = groupById(clusters.data.data);
       const hostCountByCluster = Object.keys(hostsData).map(clusterUid => hostsData[clusterUid].length);
       const maxHostCount = Math.max(...hostCountByCluster);
+
       const clustersSummary = Object.keys(clustersData).map(clusterUid => {
         // The host is overutilized if either cpuUsagePct or memUsagePct is greater than 80% or 90% respectively.
         const overutilizedHosts = hostsData[clusterUid]
