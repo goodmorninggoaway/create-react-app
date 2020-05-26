@@ -9,7 +9,7 @@ import Async from '@infosight/elmer/dist/components/Async';
 import { NoData } from '@infosight/elmer/dist/components/NoData';
 import Card from '@infosight/elmer/dist/components/Card';
 import Pagination from '@infosight/elmer/dist/components/Pagination';
-import ClusterCardBody from './ClusterCardBody';
+import ClusterCardChart from './ClusterCardChart';
 import ClusterCardHeadline from './ClusterCardHeadline';
 import style from './style.module.scss';
 import { CARD_BASE_HEIGHT, CARD_ROW_HEIGHT, MAX_NUM_HOST_ROWS } from '../../constants';
@@ -54,7 +54,7 @@ class ClusterCardsContainer extends Component {
                   return (
                     <div key={`${cluster.clusterInfo.virtualCenterUid}-${cluster.clusterInfo.clusterUid}`} className="column small-12 large-8">
                       <Card className={cx('less-padding')} title={cardTitleHeadline} style={cardHeightStyle} headerClassName="display-block">
-                        <ClusterCardBody hostsByCluster={cluster.hostsByCluster ? cluster.hostsByCluster.slice(0, numHostRows) : null} />
+                        <ClusterCardChart hostsByCluster={cluster.hostsByCluster ? cluster.hostsByCluster.slice(0, numHostRows) : null} />
                       </Card>
                     </div>
                   );
