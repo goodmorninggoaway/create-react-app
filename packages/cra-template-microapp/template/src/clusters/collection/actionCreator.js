@@ -22,13 +22,13 @@ export function fetchClusterCards() {
     dispatchStart();
 
     try {
-      const hostsByCluster = mockHostsByCluster.data;
-      const clusters = mockClusterData.data;
+      const hostsByCluster = mockHostsByCluster;
+      const clusters = mockClusterData;
 
-      const sortedHostData = hostsByCluster && hostsByCluster.data.data.filter(host => host.clusterUid).sort(sortByCpu);
+      const sortedHostData = hostsByCluster && hostsByCluster.data.filter(host => host.clusterUid).sort(sortByCpu);
 
       const hostsData = groupById(sortedHostData);
-      const clustersData = groupById(clusters.data.data);
+      const clustersData = groupById(clusters.data);
       const hostCountByCluster = Object.keys(hostsData).map(clusterUid => hostsData[clusterUid].length);
       const maxHostCount = Math.max(...hostCountByCluster);
 

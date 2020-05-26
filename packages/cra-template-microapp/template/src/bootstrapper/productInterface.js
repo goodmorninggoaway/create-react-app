@@ -22,6 +22,35 @@ const config = {
   category: 'storage',
   objects: [
     {
+      type: CLUSTER,
+      singularName: 'Cluster',
+      pluralName: 'Clusters',
+      isScopingObject: true,
+      isLeafObject: false,
+      isLazyLoaded: false,
+      genericQueryType: 'vm',
+      icon: props => (
+        // we prefer grommet or font awesome icons for anything that is not vmware related
+        <IconAdaptor {...props} type="clarity">
+          <clr-icon shape="cluster" />
+        </IconAdaptor>
+      ),
+      routeSegment: 'clusters',
+      includeInNav: true,
+      collectionViews: [
+        {
+          id: 'list',
+          name: 'Cluster List',
+          category: CARD,
+          component: ClusterCardsContainer,
+          scopingObjectTypes: null,
+          invisible: false,
+          isDefault: true,
+          requireScope: false,
+        },
+      ],
+    },
+    {
       type: HOST,
       singularName: 'Host',
       pluralName: 'Hosts',
@@ -86,35 +115,6 @@ const config = {
         component: VmDetailContainer,
         invisible: false,
       },
-    },
-    {
-      type: CLUSTER,
-      singularName: 'Cluster',
-      pluralName: 'Clusters',
-      isScopingObject: true,
-      isLeafObject: false,
-      isLazyLoaded: false,
-      genericQueryType: 'vm',
-      icon: props => (
-        // we prefer grommet or font awesome icons for anything that is not vmware related
-        <IconAdaptor {...props} type="clarity">
-          <clr-icon shape="cluster" />
-        </IconAdaptor>
-      ),
-      routeSegment: 'clusters',
-      includeInNav: true,
-      collectionViews: [
-        {
-          id: 'list',
-          name: 'Cluster List',
-          category: CARD,
-          component: ClusterCardsContainer,
-          scopingObjectTypes: null,
-          invisible: false,
-          isDefault: true,
-          requireScope: false,
-        },
-      ],
     },
   ],
   topology: {
