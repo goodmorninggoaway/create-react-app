@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import numeral from 'numeral';
 import classnames from 'classnames/bind';
+import { NoData } from '@infosight/elmer/dist/components/NoData';
 import { Progress } from '@infosight/elmer/dist/components/Progress';
 import { IconAdaptor } from '@infosight/elmer/dist/components/IconAdaptor';
 import { ObjectDetailLink } from '@infosight/elmer/dist/infrastructure';
@@ -11,8 +12,8 @@ import { OBJECTS } from '../../../../inventory/constants';
 const cx = classnames.bind(style);
 
 const ClusterCardChart = ({ hostsByCluster }) => {
-  if (hostsByCluster) {
-    return (
+  return (
+    <NoData hasData={hostsByCluster} message="No hosts available.">
       <div className={cx('elmer-grid-view', 'cluster-card-table')}>
         <table className={cx('no-border')}>
           <thead>
@@ -62,12 +63,7 @@ const ClusterCardChart = ({ hostsByCluster }) => {
           </tbody>
         </table>
       </div>
-    );
-  }
-  return (
-    <div className={classnames('flex-container', 'align-justify')}>
-      <span>No hosts available.</span>
-    </div>
+    </NoData>
   );
 };
 

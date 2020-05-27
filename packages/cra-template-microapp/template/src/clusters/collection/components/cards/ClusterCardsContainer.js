@@ -52,7 +52,7 @@ class ClusterCardsContainer extends Component {
                     height: CARD_BASE_HEIGHT + CARD_ROW_HEIGHT * numHostRows,
                   };
                   return (
-                    <div key={`${cluster.clusterInfo.virtualCenterUid}-${cluster.clusterInfo.clusterUid}`} className="column small-12 large-8">
+                    <div key={cluster.clusterInfo.clusterUid} className="column small-12 large-8">
                       <Card className={cx('less-padding')} title={cardTitleHeadline} style={cardHeightStyle} headerClassName="display-block">
                         <ClusterCardChart hostsByCluster={cluster.hostsByCluster ? cluster.hostsByCluster.slice(0, numHostRows) : null} />
                       </Card>

@@ -1,6 +1,7 @@
 import { actionsFor } from '@infosight/elmer/dist/utils/redux';
 import { FETCH_HOSTS } from './constants';
 import hostMockData from '../hostMockData';
+
 // Function for dispatching actions
 export const fetchHosts = () => async dispatch => {
   const { dispatchStart, dispatchSuccess, dispatchError } = actionsFor(FETCH_HOSTS, dispatch);

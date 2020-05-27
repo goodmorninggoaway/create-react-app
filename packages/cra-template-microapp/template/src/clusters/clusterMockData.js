@@ -3,7 +3,6 @@ export const mockClusterData = {
     {
       hostsByCluster: [
         {
-          virtualCenterUid: 272000001,
           clusterUid: '272000001domain-c517',
           clusterPath: 'LVS-ISDEV/Cluster1',
           clusterName: 'Cluster1',
@@ -13,7 +12,6 @@ export const mockClusterData = {
           memUsagePct: 80.95039494193,
         },
         {
-          virtualCenterUid: 272000001,
           clusterUid: '272000001domain-c517',
           clusterPath: 'LVS-ISDEV/Cluster1',
           clusterName: 'Cluster1',
@@ -24,7 +22,6 @@ export const mockClusterData = {
         },
       ],
       clusterInfo: {
-        virtualCenterUid: 272000001,
         clusterUid: '272000001domain-c517',
         clusterPath: 'LVS-ISDEV/Cluster1',
         clusterName: 'Cluster1',
@@ -37,7 +34,6 @@ export const mockClusterData = {
     {
       hostsByCluster: [
         {
-          virtualCenterUid: 272000001,
           clusterUid: '272000001domain-d628',
           clusterPath: 'LVS-ISDEV/Cluster2',
           clusterName: 'Cluster2',
@@ -48,7 +44,6 @@ export const mockClusterData = {
         },
       ],
       clusterInfo: {
-        virtualCenterUid: 272000001,
         clusterUid: '272000001domain-d628',
         clusterPath: 'LVS-ISDEV/Cluster2',
         clusterName: 'Cluster2',
