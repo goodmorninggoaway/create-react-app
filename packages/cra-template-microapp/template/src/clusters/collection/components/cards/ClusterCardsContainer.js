@@ -40,7 +40,7 @@ class ClusterCardsContainer extends Component {
       <Async loading={isLoading}>
         <NoData hasData={clustersSummaryData && clustersSummaryData.clusters && clustersSummaryData.clusters.length > 0}>
           {() => {
-            const PAGE_SIZE = clustersSummaryData.hostsInClusters;
+            const PAGE_SIZE = 6;
 
             return (
               <div className="row expanded">
